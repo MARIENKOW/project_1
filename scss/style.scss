@@ -54,6 +54,7 @@ $fontsize18px:18px;
 $fontfamily1:'bad script';
 $fontfamily2:'amatic sc';
 $fontfamily3:'alumni sans';
+$color1:rgba(255, 228, 196, 1);
 html{
    min-height: 2000px;
 }
@@ -84,7 +85,7 @@ html{
    left: 0;
    z-index: 999;
    font-family:$fontfamily3,serif;
-   background-color: rgba(255, 228, 196, 0.633);
+   background-color:$color1;
 		&__inner {
          // height: 50px;
          // display: flex;
@@ -134,17 +135,22 @@ html{
             }
             .header__title{
                border-bottom: 2px solid black;
+               @media (max-width:768px) {
+                  border-bottom:none;
+               }
             }
          }
 		}
       &__title{
          border-bottom: 2px solid rgba(0, 0, 0, 0);
          transition: .3s;
-
+      }
+      &__arrow{
+         display: none;
       }
       &__link{
          text-decoration: none;
-         color: rgba(255, 228, 196, 0.995);
+         color:$color1;
          font-size: $fontsize14px;
          letter-spacing: 2px;
       }
@@ -286,7 +292,10 @@ html{
          border-radius: 3px;
          flex-direction: column;
          align-items: flex-start;
-         
+         position: relative;
+         // border: 2px solid rgb(0, 0, 0);
+         // border-radius: 3px;
+         // background-color: $color1;
          &--nav{
             
             flex-direction: column;
@@ -299,11 +308,24 @@ html{
             width: auto;
             align-items:flex-start;
             visibility: visible;
-            height: 0;
+            height: auto;
             padding-top:0;
             padding-bottom:0;
             overflow: hidden;
          }
+      }
+      &__title{
+         border-bottom: none;
+      }
+      &__arrow{
+         position: absolute;
+         display: block;
+         top: 9px;
+         right: 50px;
+         aspect-ratio: 1/1;
+         height: 20px;
+         transition: .4s;
+         transform:rotate(180deg);
       }
       &__link{
          color:#000;
@@ -354,6 +376,28 @@ html{
       ._burgerOpen{
          .header__gender{
             left: 0;
+         }
+         .header__burger{
+            span{
+               border-radius: 0 0 0;
+               transform: rotate(-45deg);
+               transition: .4s;
+               &::before{
+                  top: 0;
+                  border-radius: 0 0 0;
+                  transform:rotate(90deg);
+                  transition: .4s;
+               }
+               &::after{
+                  transform: scale(0);
+               }
+            }
+         }
+      }
+      ._sliderOpen{
+         .header__arrow{
+            transform:rotate(0deg);
+            
          }
       }
    }

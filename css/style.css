@@ -131,7 +131,7 @@ html {
   left: 0;
   z-index: 999;
   font-family: "alumni sans", serif;
-  background-color: rgba(255, 228, 196, 0.633);
+  background-color: rgb(255, 228, 196);
 }
 .header__inner {
   display: grid;
@@ -192,15 +192,23 @@ html {
 .header__male:hover .header__title, .header__female:hover .header__title {
   border-bottom: 2px solid black;
 }
+@media (max-width: 768px) {
+  .header__male:hover .header__title, .header__female:hover .header__title {
+    border-bottom: none;
+  }
+}
 .header__title {
   border-bottom: 2px solid rgba(0, 0, 0, 0);
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
 }
+.header__arrow {
+  display: none;
+}
 .header__link {
   text-decoration: none;
-  color: rgba(255, 228, 196, 0.995);
+  color: rgb(255, 228, 196);
   font-size: 14px;
   letter-spacing: 2px;
 }
@@ -415,6 +423,7 @@ html {
     -webkit-box-align: start;
         -ms-flex-align: start;
             align-items: flex-start;
+    position: relative;
   }
   .header__male--nav, .header__female--nav {
     -webkit-box-orient: vertical;
@@ -434,10 +443,27 @@ html {
         -ms-flex-align: start;
             align-items: flex-start;
     visibility: visible;
-    height: 0;
+    height: auto;
     padding-top: 0;
     padding-bottom: 0;
     overflow: hidden;
+  }
+  .header__title {
+    border-bottom: none;
+  }
+  .header__arrow {
+    position: absolute;
+    display: block;
+    top: 9px;
+    right: 50px;
+    aspect-ratio: 1/1;
+    height: 20px;
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+    -webkit-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
   }
   .header__link {
     color: #000;
@@ -492,5 +518,34 @@ html {
   }
   .header ._burgerOpen .header__gender {
     left: 0;
+  }
+  .header ._burgerOpen .header__burger span {
+    border-radius: 0 0 0;
+    -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+  }
+  .header ._burgerOpen .header__burger span::before {
+    top: 0;
+    border-radius: 0 0 0;
+    -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+  }
+  .header ._burgerOpen .header__burger span::after {
+    -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+            transform: scale(0);
+  }
+  .header ._sliderOpen .header__arrow {
+    -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
 }

@@ -12,9 +12,7 @@ if(searchSvg){
          headerInner.classList.add('_searchActive')
       })
 }
-window.addEventListener('scroll',function(){
-   if(headerInner && headerInner.classList.contains('_searchActive')){headerInner.classList.remove('_searchActive')}
-})
+
 if(burger){
    burger.addEventListener('click',function(){
       if(headerInner){
@@ -27,12 +25,50 @@ if(burger){
       }
    })
 }
+let sliders = document.querySelectorAll('._slider');
+let _slideUpFlex = (target,duration = 500) => {
+   if (!target.classList.contains('_a')){
+      target.classList.add('_a');
+      target.style.height = '0px';
+   }
+}
+let _slideDownFlex = (target,duration = 500) => {
+   if (target.classList.contains('_a')){
+      target.classList.remove('_a');
+      let height = target.scrollHeight;
+      target.style.height = `${height}px`;
+}
+}
+let _slideToggleFlex = (target,duration = 500) => {
+   if (target.classList.contains('_a')){
+      return _slideDownFlex(target,duration);
+   } else {
+      return _slideUpFlex(target,duration);
+   }
+}
+function spoilerFlex(){
+   for(let i=0;i<sliders.length;i++){
+      let slider = sliders[i];
+      slider.lastElementChild.classList.add('_a');
+      slider.lastElementChild.style.height = '0px';
+      slider.addEventListener('click',function copyrightClick(){
+            slider.classList.toggle('_sliderOpen');
+            _slideToggleFlex(slider.lastElementChild);
+      })
+   }
+}
 if (window.innerWidth<=768){
    const headerHeight = header.offsetHeight;
-   if(header.getBoundingClientRect().top != 0 ){
+   let headerTop = header.getBoundingClientRect().top
+   window.addEventListener('scroll',function(){
+      if(headerInner && headerInner.classList.contains('_searchActive')){headerInner.classList.remove('_searchActive')}
+      
+   })
+   if(header != 0 ){
       const headerGenderHight = headerHeight+headerUpHeight;
       headerGender.style.height = `calc(100vh - ${headerGenderHight}px)`;
    }else{
       headerGender.style.height = `calc(100vh - (${headerHeight}px))`;
    }
+   spoilerFlex();
 }
