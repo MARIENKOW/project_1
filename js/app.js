@@ -24,22 +24,15 @@ if(burger){
          }else{
             body.style.overflow = '';
          }
-         if(headerGender && headerInner.classList.contains('_burgerOpen')){
-            // const headerHeight = header.offsetHeight;
-            // if(header.getBoundingClientRect().top != 0 ){
-            //    const headerGenderHight = headerHeight+headerUpHeight;
-            //    headerGender.style.height = `calc(100vh - ${headerGenderHight}px)`;
-            // }else{
-            //    headerGender.style.height = `calc(100vh - (${headerHeight}px))`;
-            // }
-         }
       }
    })
 }
-const headerHeight = header.offsetHeight;
-if(header.getBoundingClientRect().top != 0 ){
-   const headerGenderHight = headerHeight+headerUpHeight;
-   headerGender.style.height = `calc(100vh - ${headerGenderHight}px)`;
-}else{
-   headerGender.style.height = `calc(100vh - (${headerHeight}px))`;
+if (window.innerWidth<=768){
+   const headerHeight = header.offsetHeight;
+   if(header.getBoundingClientRect().top != 0 ){
+      const headerGenderHight = headerHeight+headerUpHeight;
+      headerGender.style.height = `calc(100vh - ${headerGenderHight}px)`;
+   }else{
+      headerGender.style.height = `calc(100vh - (${headerHeight}px))`;
+   }
 }
