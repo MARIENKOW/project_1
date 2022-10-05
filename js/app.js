@@ -49,11 +49,11 @@ let _slideToggleFlex = (target,duration = 500) => {
 function spoilerFlex(){
    for(let i=0;i<sliders.length;i++){
       let slider = sliders[i];
-      slider.lastElementChild.classList.add('_a');
-      slider.lastElementChild.style.height = '0px';
+      slider.nextElementSibling.classList.add('_a');
+      slider.nextElementSibling.style.height = '0px';
       slider.addEventListener('click',function copyrightClick(){
             slider.classList.toggle('_sliderOpen');
-            _slideToggleFlex(slider.lastElementChild);
+            _slideToggleFlex(slider.nextElementSibling);
       })
    }
 }
