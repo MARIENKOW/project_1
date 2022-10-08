@@ -59,9 +59,7 @@ $fontfamily1:'bad script';
 $fontfamily2:'amatic sc';
 $fontfamily3:'alumni sans';
 $color1:rgba(255, 228, 196, 1);
-html{
-   min-height: 2000px;
-}
+
 .container {
    max-width: 1400px;
    margin: auto;
@@ -83,6 +81,9 @@ html{
       font-size: $fontsize7px;
    }
 }
+//! ///---HEADER_UP---\\\ !\\
+
+/*! ///---HEADER_UP---\\\ !*/
 .header {
    position: sticky;
    top: 0;
@@ -267,6 +268,253 @@ html{
          }
       }
 }
+//! ///---HEADER---\\\ !\\
+
+/*! ///---HEADER---\\\ !*/
+.test {
+   position: absolute;
+   top: -200px;
+   z-index: 1000;
+   left: 40%;
+   height: 500px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   &__inner {
+      animation: test 7s infinite linear;
+      width: 150px;
+      aspect-ratio: 1/1;
+      // background-color: #fff;
+      position: relative;
+   }
+   &__img{
+      animation: testq 7s infinite linear;
+      height: 40px;
+      position: absolute;
+      top: 0;
+      left: 0;
+   }
+   .t1{
+      height: 55px;
+      top: 0;
+      left: auto;
+      right: 0;
+   }
+   .t2{
+      height: 70px;
+      top: auto;
+      bottom: -10px;
+      right: -10px;
+      left: auto;
+
+   }
+   .t3{
+      top: auto;
+      bottom: 0;
+      left: -10px;
+   }
+}
+.intro {
+   background: url(../img/intro/attention-european-man-with-megaphone-pointing-finger-to-the-left-on-pink-background.jpg) center;
+   background-size: cover;
+   position: relative;
+
+   &__inner {
+      display: flex;
+      align-items: center;
+      height: calc(100vh - 100px);
+   }
+   &__btn{
+      margin: 0px 0px 0px 50px;
+      display: flex;
+      align-items: center;
+      font-size: 30px;
+      text-transform: uppercase;
+      font-family: $fontfamily2;
+      font-weight: 900;
+      letter-spacing: 3px;
+      word-spacing: 10px;
+      border: 2px solid;
+      text-align: center;
+      padding: 20px;
+      border-radius: 50%;
+      position: relative;
+      aspect-ratio: 1/1;
+      color: $color1;
+      top: 0;
+      transition: .4s;
+      &:hover{
+         top: -20px;
+         // top: -15px;
+         // box-shadow: 15px 15px 10px #000;
+         box-shadow: 0 20px 0px #000;
+         .intro__img{
+            height: 60px;
+            top: 5px;
+            left: 10px;
+            animation-play-state: paused;
+            // animation: testq 4s infinite linear;
+            &--1{
+               top: -15px;
+               left: auto;
+               right: -15px;
+               height:85px;
+            }
+            &--2{
+               top: auto;
+               bottom: -25px;
+               left: auto;
+               right: -25px;
+               height:115px;
+            }
+            &--3{
+               top: auto;
+               bottom: -20px;
+               left: -20px;
+               height: 65px;
+            }
+            &--4{
+               top: auto;
+               bottom: 85px;
+               height: 100px;
+               left: -70px;
+            }
+            &--5{
+               top: auto;
+               bottom: 90px;
+               left: auto;
+               right: -40px;
+               height: 100px;
+            }
+
+         }
+         .intro__animation--twist{
+            animation-play-state: paused;
+         }
+
+      }
+   }
+   &__animation{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: calc(100% + 90px);
+      aspect-ratio: 1/1;
+      transform: translate3d(-50%,-50%,0);
+      &--twist{
+         animation: test 7s infinite ease-in-out;
+         position: relative;
+         width: 100%;
+         aspect-ratio: 1/1;
+      }
+   }
+   &__img{
+      animation: testq 7s infinite ease-in-out;
+      position: absolute;
+      top: 10px;
+      left: 45px;
+      height: 45px;
+      transition: .4s;
+      &--1{
+         top: -10px;
+         left: auto;
+         right: 30px;
+         height: 70px;
+
+      }
+      &--2{
+         top: auto;
+         bottom: -10px;
+         left: auto;
+         right: 20px;
+         height: 100px;
+         // transform: rotate(90deg);
+      }
+      &--3{
+         top: auto;
+         bottom: 10px;
+         left: 10px;
+         height: 50px;
+      }
+      &--4{
+         top: auto;
+         bottom: 100px;
+         height: 80px;
+         left: -35px;
+      }
+      &--5{
+         top: auto;
+         bottom: 90px;
+         left: auto;
+         right: 0px;
+         height: 80px;
+      }
+   }
+   &__swipe{
+      cursor: pointer;
+      position: absolute;
+      left: 0px;
+      bottom: 0px;
+      width: 100%;
+      z-index: 2;
+      &::after{
+         content: '';
+         position: absolute;
+         top: 0;
+         left: 0;
+         width:100%;
+         z-index: -1;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.17);
+         backdrop-filter: blur(10px);
+      }
+      // transform: translateX(-50%);
+      &--2{
+         align-self: flex-end;
+         justify-self: center;
+         position: relative;
+         text-align: center;
+      }
+   }
+   &__go{
+      font-family: $fontfamily3;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: $color1;
+      padding: 6px 0px 29px 0px;
+   }
+   &__arrow{
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translate3d(-50%,0,0);
+      height: 40px;
+      aspect-ratio: 2/1;
+      fill: $color1;
+      animation: arrow 3s infinite ease-in-out;
+      &--2{
+         top: 21px;
+         height: 20px;
+      }
+   }
+}
+@keyframes arrow{
+   0%{transform: translate3d(-50%,0,0);}
+   50%{transform: translate3d(-50%,5px,0);}
+   100%{transform: translate3d(-50%,0,0);}
+}
+@keyframes test {
+   from{transform: rotate(0);}
+   to{transform: rotate(360deg);}
+}
+@keyframes testq {
+   from{transform: rotate(0);}
+   to{transform: rotate(-360deg);}
+}
+
+
 @keyframes header {
    0%{transform:rotateX(0) scale(1)}
    50%{transform:rotateX(45deg) scale(1.2)}
@@ -413,5 +661,17 @@ html{
          }
       }
    }
+   .intro{
+      background: url(../img/intro/surprised-curly-woman-in-beret-looks-to-left-charming-lady-in-pink-sweater-sunglasses-and-green-skirt-holds-grey-handbag.jpg) center / cover;
+      &__inner{
+         align-items: flex-start;
+
+      }
+      &__btn{
+         margin: 30% 0px 0px 30px;
+         font-size: 23px;
+      }
+   }
+
 }
 
