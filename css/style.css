@@ -312,14 +312,37 @@ html {
 .header__basket {
   -ms-flex-item-align: center;
       align-self: center;
-}
-.header__basket img {
-  height: 26px;
-  aspect-ratio: 1/1;
+  position: relative;
 }
 .header__basket:hover {
   -webkit-animation: header 1s linear;
           animation: header 1s linear;
+}
+.header__svg {
+  height: 26px;
+  aspect-ratio: 1/1;
+}
+.header__count {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: "alumni sans";
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  position: absolute;
+  right: -4px;
+  bottom: 0;
+  aspect-ratio: 1/1;
+  height: 12px;
+  border-radius: 50%;
+  background-color: red;
 }
 .header__burger {
   height: 30px;
@@ -566,6 +589,9 @@ html {
   margin: 0px 10px;
   padding: 0px;
 }
+.slider:hover .slick-arrow {
+  opacity: 0.8;
+}
 .slider--up {
   background-color: #fff;
   padding: 50px 0px;
@@ -583,6 +609,36 @@ html {
 .slider__item a {
   display: block;
   height: 100%;
+}
+.slider__img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  padding: 10px 10px;
+  margin: 0px 0px 15px 0px;
+}
+.slider__img img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.slider__title {
+  text-transform: uppercase;
+  font-family: "alumni sans";
+  letter-spacing: 2px;
+  font-weight: 600;
+  font-size: 14px;
+  color: rgb(82, 82, 82);
+  padding: 0px 20px;
+  text-align: center;
+}
+.slider__price {
+  text-align: center;
+  color: #000;
+  font-size: 20px;
+  text-transform: lowercase;
+  font-weight: 700;
+  padding: 10px 0px;
+  letter-spacing: 0px;
 }
 .slider .slick-track {
   display: -webkit-box;
@@ -608,7 +664,7 @@ html {
   -webkit-transform: translatey(-50%);
       -ms-transform: translatey(-50%);
           transform: translatey(-50%);
-  opacity: 0.3;
+  opacity: 0;
 }
 .slider .slick-arrow:hover {
   opacity: 1;

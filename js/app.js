@@ -3,13 +3,13 @@ $(document).ready(function(){
       arrows:true,
       dots:true,
       // adaptiveHeight:true,
-      slidesToShow:3,
-      slidesToScroll:2,
+      slidesToShow:5,
+      slidesToScroll:3,
       speed:500,
       easing:'ease-in-out',
       infinite:true,
-      // autoplay:true,
-      autoplaySpeed:3000,
+      autoplay:true,
+      autoplaySpeed:4000,
       touchTreshold:5, 
       centerMode:false,
       // variableWidth:true,
@@ -20,12 +20,13 @@ $(document).ready(function(){
          {
             breakpoint:768,
             settings:{
-               slidesToShow :1,
+               slidesToShow :2,
+               slidesToScroll:1,
             }
          },{
             breakpoint:400,
             settings:{
-               slidesToShow :1,
+               slidesToShow :2,
             }
          }
       ]

@@ -228,14 +228,31 @@ $color1:rgba(255, 228, 196, 1);
       }
 		&__basket {
          align-self: center;
-         img{
-            height: 26px;
-            aspect-ratio: 1/1;
-         }
+         position: relative;
          &:hover{
             animation: header 1s linear;
          }
 		}
+      &__svg{
+         height: 26px;
+         aspect-ratio: 1/1;
+      }
+      &__count{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         font-family: $fontfamily3;
+         font-size: 12px;
+         font-weight: 700;
+         color: #fff;
+         position: absolute;
+         right: -4px;
+         bottom: 0;
+         aspect-ratio: 1/1;
+         height: 12px;
+         border-radius: 50%;
+         background-color: red;
+      }
       &__burger{
          height: 30px;
          aspect-ratio: 1/1;
@@ -465,6 +482,11 @@ $color1:rgba(255, 228, 196, 1);
    position: relative;
    margin: 0px 10px;
    padding: 0px;
+   &:hover{
+      .slick-arrow{
+         opacity: 0.8;
+      }
+   }
    &--up{
       background-color: #fff;
       padding: 50px 0px;
@@ -477,6 +499,41 @@ $color1:rgba(255, 228, 196, 1);
          display: block;
          height: 100%;
       }
+   }
+   &__block{
+      // aspect-ratio: 1.5/1;
+      &:hover{
+
+      }
+   }
+   &__img{
+      width: 100%;
+      aspect-ratio: 1/1;
+      padding: 10px 10px;
+      margin: 0px 0px 15px 0px;
+      img{
+         width: 100%;
+         object-fit: cover;
+      }
+   }
+   &__title{
+      text-transform: uppercase;
+      font-family: $fontfamily3;
+      letter-spacing: 2px;
+      font-weight: 600;
+      font-size: 14px;
+      color: rgb(82, 82, 82);
+      padding: 0px 20px;
+      text-align: center;
+   }
+   &__price{
+      text-align: center;
+      color: #000;
+      font-size: 20px;
+      text-transform: lowercase;
+      font-weight: 700;
+      padding: 10px 0px;
+      letter-spacing: 0px;
    }
    .slick-track{
       display: flex;
@@ -494,7 +551,7 @@ $color1:rgba(255, 228, 196, 1);
       height: 40px;
       transition: .1s;
       transform: translatey(-50%);
-      opacity: .3;
+      opacity: 0;
       &:hover{
          opacity: 1;
          height: 43px;
