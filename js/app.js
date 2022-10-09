@@ -1,3 +1,36 @@
+$(document).ready(function(){
+   $('.slider').slick({
+      arrows:true,
+      dots:true,
+      // adaptiveHeight:true,
+      slidesToShow:3,
+      slidesToScroll:2,
+      speed:500,
+      easing:'ease-in-out',
+      infinite:true,
+      // autoplay:true,
+      autoplaySpeed:3000,
+      touchTreshold:5, 
+      centerMode:false,
+      // variableWidth:true,
+      // rows:1,
+      // slidesPerRow:1,
+      // appendArrows:$('.arrows'),
+      responsive:[
+         {
+            breakpoint:768,
+            settings:{
+               slidesToShow :1,
+            }
+         },{
+            breakpoint:400,
+            settings:{
+               slidesToShow :1,
+            }
+         }
+      ]
+   });
+});
 const searchSvg = document.querySelector('.header__btn');
 const headerInner = document.querySelector('.header__inner');
 const body = document.querySelector('body');
@@ -6,11 +39,18 @@ const headerUp = document.querySelector('.header--up');
 const header = document.querySelector('.header');
 const headerGender = document.querySelector('.header__gender');
 const headerUpHeight = headerUp.offsetHeight;
-if(searchSvg){
-   if(headerInner && !headerInner.classList.contains('_searchActive'))
-      searchSvg.addEventListener('click',function(){
-         headerInner.classList.add('_searchActive')
-      })
+const intro = document.querySelector('.intro__inner');
+let sliders = document.querySelectorAll('._slider');
+let on = null;
+let i = null;
+let x = 0;
+function headerInnerSearch(){
+   if(searchSvg){
+      if(headerInner && !headerInner.classList.contains('_searchActive'))
+         searchSvg.addEventListener('click',function(){
+            headerInner.classList.add('_searchActive')
+         })
+   }
 }
 
 if(burger){
@@ -25,7 +65,6 @@ if(burger){
       }
    })
 }
-let sliders = document.querySelectorAll('._slider');
 let _slideUpFlex = (target,duration = 500) => {
    if (!target.classList.contains('_a')){
       target.classList.add('_a');
@@ -57,47 +96,47 @@ function spoilerFlex(){
       })
    }
 }
-function genderHight(){
-   const headerHeight = header.offsetHeight;
-   const headerTop = header.getBoundingClientRect().top
-   if(headerTop != 0 ){
-      const headerGenderHight = headerHeight+headerUpHeight;
-      headerGender.style.height = `calc(100vh - ${headerGenderHight}px)`;
-   }else{
-      headerGender.style.height = `calc(100vh - (${headerHeight}px))`;
-   }
-}
-let i = null;
-let x = 0;
-setInterval(function(){
+
+setInterval(function(){ 
    let y = window.scrollY;
    if(i === y){
       x = 0;
-      console.log('стоим')
    }
    i = y;
 },500)
-
-function windowWidth(){
-   if (window.innerWidth<=768){
-      window.addEventListener('scroll',function(){
-         genderHight();
-         x++;
-         console.log(x)
-         if(headerInner && headerInner.classList.contains('_searchActive') && x >= 50){headerInner.classList.remove('_searchActive')}
-      })
-      genderHight();
-      spoilerFlex();
+function genderHight(){
+   if(window.innerWidth<=768){
+      const headerHeight = header.offsetHeight;
+      const headerTop = header.getBoundingClientRect().top
+      if(headerTop != 0 ){
+         const headerGenderHight = headerHeight+headerUpHeight;
+         headerGender.style.height = `calc(100vh - ${headerGenderHight}px)`;
+      }else{
+         headerGender.style.height = `calc(100vh - (${headerHeight}px))`;
+      }
+   }else{
+      headerGender.style.height = ``;
    }
 }
-windowWidth();
-const intro = document.querySelector('.intro__inner');
-function introHeight(){
-      const headerHeight = header.offsetHeight;
-      const headerGenderHight = headerHeight+headerUpHeight;
-      intro.style.height = `calc(100vh - ${headerGenderHight}px)`;
+function windowWidth(){
+   if (window.innerWidth<=768){
+      if (on != 1){
+         on = 1;
+         headerInnerSearch();
+         spoilerFlex();
+         window.addEventListener('scroll',function scrollSearch(){
+            genderHight();
+            console.log('ff')
+            x++;
+            if(headerInner && headerInner.classList.contains('_searchActive') && x >= 50){headerInner.classList.remove('_searchActive')}
+         })
+      }
+   }else{
+   }
 }
-introHeight()
+genderHight();
+windowWidth();
 window.addEventListener('resize',function(){
-   introHeight();
+   windowWidth();
+   genderHight();
 })

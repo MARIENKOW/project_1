@@ -66,8 +66,8 @@ $color1:rgba(255, 228, 196, 1);
    padding: 0px 10px;
 }
 .header--up {
-   font-family:$fontfamily1,sans-serif;
-   font-weight: 700;
+   font-family:$fontfamily2,sans-serif;
+   font-weight: 900;
    letter-spacing: 3px;
    height: 20px;
    color: white;
@@ -78,7 +78,7 @@ $color1:rgba(255, 228, 196, 1);
    align-items: center;
    &__title{
       text-transform: uppercase;
-      font-size: $fontsize7px;
+      font-size:$fontsize12px;
    }
 }
 //! ///---HEADER_UP---\\\ !\\
@@ -139,7 +139,7 @@ $color1:rgba(255, 228, 196, 1);
                visibility:visible;
             }
             .header__title{
-               border-bottom: 2px solid black;
+               border-bottom: 3px solid black;
                @media (max-width:768px) {
                   border-bottom:none;
                }
@@ -147,7 +147,7 @@ $color1:rgba(255, 228, 196, 1);
          }
 		}
       &__title{
-         border-bottom: 2px solid rgba(0, 0, 0, 0);
+         border-bottom: 3px solid rgba(0, 0, 0, 0);
          transition: .3s;
       }
       &__arrow{
@@ -158,6 +158,10 @@ $color1:rgba(255, 228, 196, 1);
          color:$color1;
          font-size: $fontsize14px;
          letter-spacing: 2px;
+         border-bottom: 2px solid transparent;
+         &:hover{
+            border-bottom: 2px solid $color1;
+         }
       }
       &__mobile{
          display: none;
@@ -169,7 +173,8 @@ $color1:rgba(255, 228, 196, 1);
          img{
             object-fit: cover;
             width: auto;
-            @include adaptiv-value('height',55,45,1);
+            // @include adaptiv-value('height',55,45,1);
+            height: 55px;;
          }
          &:hover{
             transform: scale(1.1);
@@ -271,50 +276,9 @@ $color1:rgba(255, 228, 196, 1);
 //! ///---HEADER---\\\ !\\
 
 /*! ///---HEADER---\\\ !*/
-.test {
-   position: absolute;
-   top: -200px;
-   z-index: 1000;
-   left: 40%;
-   height: 500px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   &__inner {
-      animation: test 7s infinite linear;
-      width: 150px;
-      aspect-ratio: 1/1;
-      // background-color: #fff;
-      position: relative;
-   }
-   &__img{
-      animation: testq 7s infinite linear;
-      height: 40px;
-      position: absolute;
-      top: 0;
-      left: 0;
-   }
-   .t1{
-      height: 55px;
-      top: 0;
-      left: auto;
-      right: 0;
-   }
-   .t2{
-      height: 70px;
-      top: auto;
-      bottom: -10px;
-      right: -10px;
-      left: auto;
 
-   }
-   .t3{
-      top: auto;
-      bottom: 0;
-      left: -10px;
-   }
-}
 .intro {
+   overflow: hidden;
    background: url(../img/intro/attention-european-man-with-megaphone-pointing-finger-to-the-left-on-pink-background.jpg) center;
    background-size: cover;
    position: relative;
@@ -322,7 +286,7 @@ $color1:rgba(255, 228, 196, 1);
    &__inner {
       display: flex;
       align-items: center;
-      height: calc(100vh - 100px);
+      height: calc(100vh - 89px);
    }
    &__btn{
       margin: 0px 0px 0px 50px;
@@ -345,15 +309,12 @@ $color1:rgba(255, 228, 196, 1);
       transition: .4s;
       &:hover{
          top: -20px;
-         // top: -15px;
-         // box-shadow: 15px 15px 10px #000;
          box-shadow: 0 20px 0px #000;
          .intro__img{
             height: 60px;
             top: 5px;
             left: 10px;
             animation-play-state: paused;
-            // animation: testq 4s infinite linear;
             &--1{
                top: -15px;
                left: auto;
@@ -428,7 +389,6 @@ $color1:rgba(255, 228, 196, 1);
          left: auto;
          right: 20px;
          height: 100px;
-         // transform: rotate(90deg);
       }
       &--3{
          top: auto;
@@ -500,6 +460,83 @@ $color1:rgba(255, 228, 196, 1);
       }
    }
 }
+.slider {
+   background-color: #fff;
+   position: relative;
+   margin: 0px 10px;
+   padding: 0px;
+   &--up{
+      background-color: #fff;
+      padding: 50px 0px;
+   }
+   &__item {
+      object-fit: cover;
+      display: flex;
+      justify-content: center;
+      a{
+         display: block;
+         height: 100%;
+      }
+   }
+   .slick-track{
+      display: flex;
+      align-items: flex-start;
+   }
+   .slick-list{
+      overflow: hidden;
+   }
+   .slick-arrow{
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      font-size: 0;
+      aspect-ratio: 1/1;
+      height: 40px;
+      transition: .1s;
+      transform: translatey(-50%);
+      opacity: .3;
+      &:hover{
+         opacity: 1;
+         height: 43px;
+      }
+   }
+   .slick-prev{
+      
+      left: 5px;
+      background: url(../img/slider/arrow1.png) center / cover;
+      
+   }
+   .slick-next{
+      right: 5px;
+      background: url(../img/slider/arrow2.png) center / cover;
+   }
+   .slick-dots{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      li{
+         list-style:none;
+         margin:10px 3px;
+
+      }
+      button{
+         font-size: 0;
+         aspect-ratio: 1/1;
+         height: 10px;
+         border-radius: 50%;
+         background-color: rgba(0, 0, 0, 0.3);
+      }
+      .slick-active{
+         button{
+            background-color: #000;
+         }
+      }
+   }
+}
+
+//! ///---INTRO---\\\ !\\
+
+/*! ///---INTRO---\\\ !*/
 @keyframes arrow{
    0%{transform: translate3d(-50%,0,0);}
    50%{transform: translate3d(-50%,5px,0);}
@@ -526,6 +563,7 @@ $color1:rgba(255, 228, 196, 1);
       &__inner{
          grid-template-columns:1fr  0 1fr;
          gap:2px;
+         
       }
       &__gender{
          padding: 10px 0px;
@@ -589,6 +627,10 @@ $color1:rgba(255, 228, 196, 1);
       &__link{
          color:#000;
          font-size: 20px;
+         border-bottom: none;
+         &:hover{
+            border-bottom: none;
+         }
       }
       &__mobile{
          display: flex;
@@ -601,6 +643,10 @@ $color1:rgba(255, 228, 196, 1);
       }
       &__logo{
          grid-column-start: 2;
+         img{
+         height: 45px;
+
+         }
       }
       &__form{
          &::after{
@@ -665,6 +711,7 @@ $color1:rgba(255, 228, 196, 1);
       background: url(../img/intro/surprised-curly-woman-in-beret-looks-to-left-charming-lady-in-pink-sweater-sunglasses-and-green-skirt-holds-grey-handbag.jpg) center / cover;
       &__inner{
          align-items: flex-start;
+         height: calc(100vh - 79px);
 
       }
       &__btn{
