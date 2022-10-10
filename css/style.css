@@ -586,6 +586,7 @@ html {
   height: 20px;
 }
 
+/*! ///---INTRO---\\\ !*/
 .slider {
   background-color: #fff;
   position: relative;
@@ -707,7 +708,32 @@ html {
   background-color: #000;
 }
 
-/*! ///---INTRO---\\\ !*/
+/*! ///---SLIDER---\\\ !*/
+.about {
+  background-color: #fff;
+  padding: 30px 0px;
+  background: url(../img/about/beautiful-smiling-young-blonde-woman-pointing-in-sunglasses-holding-shopping-bags-and-credit-card-on-a-pink-wall.jpg) center/cover;
+  color: rgb(255, 228, 196);
+}
+.about__right {
+  max-width: 300px;
+  padding: 20px 10px;
+  margin: 0px 0px 0px auto;
+}
+.about__title {
+  font-family: "alumni sans";
+  text-transform: uppercase;
+  font-size: 42px;
+  font-weight: 600;
+  padding: 20px 0px;
+  letter-spacing: 1px;
+}
+.about__text {
+  font-family: "amatic sc";
+  font-size: 28px;
+}
+
+/*! ///---ABOUT---\\\ !*/
 .ship {
   background-color: rgb(255, 255, 255);
   width: 100%;
@@ -775,6 +801,38 @@ html {
   height: 14px;
   position: absolute;
   left: -17px;
+}
+
+/*! ///---SHIP---\\\ !*/
+.map {
+  background-color: #fff;
+}
+.map__inner {
+  padding: 30px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.map__geo {
+  width: 60%;
+}
+.map__right {
+  width: 40%;
+  padding: 0px 20px;
+}
+.map__title {
+  font-family: "alumni sans";
+  font-size: 42px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #000;
+}
+.map__text {
+  font-size: 28px;
+  font-family: "amatic sc";
+  font-weight: 900;
 }
 
 @-webkit-keyframes arrow {
@@ -1064,6 +1122,9 @@ html {
     margin: 30% 0px 0px 30px;
     font-size: 23px;
   }
+  .about {
+    background: url(../img/about/fon2.jpg) center/cover;
+  }
   .ship__btn {
     cursor: pointer;
     display: -webkit-box;
@@ -1125,5 +1186,27 @@ html {
     -o-transition: 0.4s;
     transition: 0.4s;
     overflow: hidden;
+  }
+  .map {
+    text-align: center;
+  }
+  .map__geo {
+    width: 100%;
+    aspect-ratio: 2/1;
+  }
+  .map__right {
+    width: 100%;
+    padding: 10px 0px;
+  }
+  .map__title {
+    padding: 10px 0px;
+  }
+  .map__text {
+    padding: 0px 30px;
+  }
+}
+@media (max-width: 566px) {
+  .about__right {
+    max-width: 200px;
   }
 }

@@ -482,6 +482,9 @@ $color1:rgba(255, 228, 196, 1);
       }
    }
 }
+//! ///---INTRO---\\\ !\\
+
+/*! ///---INTRO---\\\ !*/
 .slider {
    background-color: #fff;
    position: relative;
@@ -596,9 +599,41 @@ $color1:rgba(255, 228, 196, 1);
    }
 }
 
-//! ///---INTRO---\\\ !\\
+//! ///---SLIDER---\\\ !\\
 
-/*! ///---INTRO---\\\ !*/
+/*! ///---SLIDER---\\\ !*/
+.about {
+   background-color: #fff;
+   padding: 30px 0px;
+   background: url(../img/about/beautiful-smiling-young-blonde-woman-pointing-in-sunglasses-holding-shopping-bags-and-credit-card-on-a-pink-wall.jpg) center / cover;
+   color: $color1;
+   &__inner {
+   }
+
+
+   &__right {
+      max-width: 300px;
+      padding: 20px 10px;
+      margin: 0px 0px 0px auto;
+   }
+
+   &__title {
+      font-family: $fontfamily3;
+      text-transform: uppercase;
+      font-size: 42px;
+      font-weight: 600;
+      padding: 20px 0px;
+      letter-spacing: 1px;
+   }
+
+   &__text {
+      font-family: $fontfamily2;
+      font-size: 28px;
+   }
+}
+//! ///---ABOUT---\\\ !\\
+
+/*! ///---ABOUT---\\\ !*/
 .ship{
    background-color: rgb(255, 255, 255);
    width: 100%;
@@ -665,6 +700,44 @@ $color1:rgba(255, 228, 196, 1);
       left: -17px;
    }
 }
+//! ///---SHIP---\\\ !\\
+
+/*! ///---SHIP---\\\ !*/
+.map {
+   background-color: #fff;
+   &__inner {
+      padding: 30px 0px;
+      display: flex;
+      flex-wrap: wrap;
+   }
+
+   &__geo {
+      width: 60%;
+      // aspect-ratio: 2/1;
+   }
+
+   &__right {
+      width: 40%;
+      padding: 0px 20px;
+
+   }
+
+   &__title {
+      font-family:$fontfamily3;
+      font-size: 42px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #000;
+   }
+
+   &__text {
+      font-size: 28px;
+      font-family: $fontfamily2;
+      font-weight: 900;
+   }
+}
+
+
 
 @keyframes arrow{
    0%{transform: translate3d(-50%,0,0);}
@@ -679,8 +752,6 @@ $color1:rgba(255, 228, 196, 1);
    from{transform: rotate(0);}
    to{transform: rotate(-360deg);}
 }
-
-
 @keyframes header {
    0%{transform:rotateX(0) scale(1)}
    50%{transform:rotateX(45deg) scale(1.2)}
@@ -848,9 +919,10 @@ $color1:rgba(255, 228, 196, 1);
          font-size: 23px;
       }
    }
+   .about{
+      background: url(../img/about/fon2.jpg) center / cover;
+   }
    .ship{
-      &__block{
-      }
       &__btn{
          cursor: pointer;
          display: flex;
@@ -869,17 +941,12 @@ $color1:rgba(255, 228, 196, 1);
             background:url(../img/ship/arrow1.png) center / cover;
          }
       }
-      &__title{
-
-      }
       ._sliderOpen{
          .ship__btn{
             &::after{
                transform: translateY(-50%) rotate(180deg);
             }
          }
-      }
-      &__line{
       }
       &__1{
          padding: 10px 10px 0px 10px;
@@ -908,7 +975,29 @@ $color1:rgba(255, 228, 196, 1);
          transition: .4s;
          overflow: hidden;
       }
-      .target{
+   }
+   .map{
+      text-align: center;
+      &__geo{
+         width: 100%;
+         aspect-ratio: 2/1;
+      }
+      &__right{
+         width: 100%;
+         padding: 10px 0px;
+      }
+      &__title{
+         padding: 10px 0px;
+      }
+      &__text{
+         padding: 0px 30px;
+      }
+   }
+}
+@media (max-width:566px){
+   .about{
+      &__right{
+         max-width: 200px;
       }
    }
 }
