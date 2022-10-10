@@ -41,7 +41,6 @@ const header = document.querySelector('.header');
 const headerGender = document.querySelector('.header__gender');
 const headerUpHeight = headerUp.offsetHeight;
 const intro = document.querySelector('.intro__inner');
-let sliders = document.querySelectorAll('._slider');
 let on = null;
 let i = null;
 let x = 0;
@@ -87,13 +86,16 @@ let _slideToggleFlex = (target,duration = 500) => {
    }
 }
 function spoilerFlex(){
+   let sliders = document.querySelectorAll('._slider');
    for(let i=0;i<sliders.length;i++){
       let slider = sliders[i];
       slider.nextElementSibling.classList.add('_a');
       slider.nextElementSibling.style.height = '0px';
       slider.addEventListener('click',function copyrightClick(){
-            slider.classList.toggle('_sliderOpen');
+            if(slider.classList.contains('_slider')){
+               slider.parentElement.classList.toggle('_sliderOpen');
             _slideToggleFlex(slider.nextElementSibling);
+            }
       })
    }
 }
@@ -119,20 +121,31 @@ function genderHight(){
       headerGender.style.height = ``;
    }
 }
+const shipSpoilers = document.querySelectorAll('.ship__btn')
+function addSliders(){
+   for(let shipSpoiler of shipSpoilers ){
+      shipSpoiler.classList.add('_slider')
+   }
+}
 function windowWidth(){
    if (window.innerWidth<=768){
+      addSliders();
       if (on != 1){
          on = 1;
          headerInnerSearch();
          spoilerFlex();
          window.addEventListener('scroll',function scrollSearch(){
             genderHight();
-            console.log('ff')
             x++;
             if(headerInner && headerInner.classList.contains('_searchActive') && x >= 50){headerInner.classList.remove('_searchActive')}
          })
       }
    }else{
+      // for(let shipSpoiler of shipSpoilers ){
+      //    shipSpoiler.classList.remove('_slider')
+      //    shipSpoiler.nextElementSibling.style.height = '';
+
+      // }
    }
 }
 genderHight();
@@ -140,4 +153,23 @@ windowWidth();
 window.addEventListener('resize',function(){
    windowWidth();
    genderHight();
+})
+const swipe = document.querySelector('.intro__swipe');
+const slider = document.querySelector('.slider--up');
+if (swipe){
+   swipe.addEventListener('click',function(){
+      slider.scrollIntoView({
+         behavior: 'smooth',
+         block: "start",
+         inline: "nearest"
+      });
+   })
+}
+window.addEventListener('scroll',function(){
+   const partWindow = (window.innerHeight/4)*3
+   if(swipe.getBoundingClientRect().top<= partWindow){
+      swipe.classList.add('_hiden')
+   }else{
+      swipe.classList.remove('_hiden')
+   }
 })
