@@ -172,4 +172,10 @@ window.addEventListener('scroll',function(){
    }else{
       swipe.classList.remove('_hiden')
    }
+   console.log(this.window.scrollY);
+   if(this.window.scrollY>=20){
+      header.classList.add('_fixed');
+   }else{
+      header.classList.remove('_fixed');
+   }
 })

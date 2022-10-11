@@ -85,12 +85,14 @@ $color1:rgba(255, 228, 196, 1);
 
 /*! ///---HEADER_UP---\\\ !*/
 .header {
-   position: sticky;
-   top: 0;
+   position: absolute;
+   width: 100%;
+   top: 20;
    left: 0;
    z-index: 999;
    font-family:$fontfamily3,serif;
    background-color:$color1;
+   transition: .3s;
 		&__inner {
          // height: 50px;
          // display: flex;
@@ -290,11 +292,19 @@ $color1:rgba(255, 228, 196, 1);
          }
       }
 }
+._fixed{
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   // background-color: rgba(255, 228, 196, .8);
+}
 //! ///---HEADER---\\\ !\\
 
 /*! ///---HEADER---\\\ !*/
 
 .intro {
+   margin: 69px 0px 0px 0px;
    overflow: hidden;
    background: url(../img/intro/attention-european-man-with-megaphone-pointing-finger-to-the-left-on-pink-background.jpg) center;
    background-size: cover;
@@ -734,6 +744,7 @@ $color1:rgba(255, 228, 196, 1);
       font-size: 28px;
       font-family: $fontfamily2;
       font-weight: 900;
+      max-width: 300px;
    }
 }
 
@@ -908,6 +919,7 @@ $color1:rgba(255, 228, 196, 1);
       }
    }
    .intro{
+      margin: 59px 0px 0px 0px;
       background: url(../img/intro/surprised-curly-woman-in-beret-looks-to-left-charming-lady-in-pink-sweater-sunglasses-and-green-skirt-holds-grey-handbag.jpg) center / cover;
       &__inner{
          align-items: flex-start;
@@ -950,6 +962,9 @@ $color1:rgba(255, 228, 196, 1);
       }
       &__1{
          padding: 10px 10px 0px 10px;
+         &:last-child{
+            padding: 10px 10px 10px;
+         }
          &--img{
             margin: 0px 10px 0px 0px;
          }
@@ -968,6 +983,8 @@ $color1:rgba(255, 228, 196, 1);
          overflow: hidden;
       }
       &__2{
+
+         padding: 10px 10px 0px ;
          width: 100%;
       }
       .tab{
@@ -991,6 +1008,7 @@ $color1:rgba(255, 228, 196, 1);
       }
       &__text{
          padding: 0px 30px;
+         max-width: none;
       }
    }
 }
@@ -998,6 +1016,34 @@ $color1:rgba(255, 228, 196, 1);
    .about{
       &__right{
          max-width: 200px;
+      }
+   }
+}
+@media (max-width:374px){
+   .header{
+      &__logo{
+         grid-column-start: 1;
+         justify-self: start;
+      }
+      &__right{
+         gap: 12px;
+      }
+      &__search{
+         max-width: 90px;
+      }
+   }
+   .about{
+      &__right{
+         max-width: 180px;
+      }
+   }
+   .map{
+      &__title{
+         font-size: 38px;
+      }
+      &__text{
+         padding: 0px 0px;
+         font-size: 24px;
       }
    }
 }

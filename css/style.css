@@ -122,13 +122,16 @@ html {
 
 /*! ///---HEADER_UP---\\\ !*/
 .header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  position: absolute;
+  width: 100%;
+  top: 20;
   left: 0;
   z-index: 999;
   font-family: "alumni sans", serif;
   background-color: rgb(255, 228, 196);
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
 }
 .header__inner {
   display: grid;
@@ -377,8 +380,16 @@ html {
   border-radius: 2px 0 0 2px;
 }
 
+._fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 /*! ///---HEADER---\\\ !*/
 .intro {
+  margin: 69px 0px 0px 0px;
   overflow: hidden;
   background: url(../img/intro/attention-european-man-with-megaphone-pointing-finger-to-the-left-on-pink-background.jpg) center;
   background-size: cover;
@@ -833,6 +844,7 @@ html {
   font-size: 28px;
   font-family: "amatic sc";
   font-weight: 900;
+  max-width: 300px;
 }
 
 @-webkit-keyframes arrow {
@@ -1110,6 +1122,7 @@ html {
             transform: rotate(0deg);
   }
   .intro {
+    margin: 59px 0px 0px 0px;
     background: url(../img/intro/surprised-curly-woman-in-beret-looks-to-left-charming-lady-in-pink-sweater-sunglasses-and-green-skirt-holds-grey-handbag.jpg) center/cover;
   }
   .intro__inner {
@@ -1159,6 +1172,9 @@ html {
   .ship__1 {
     padding: 10px 10px 0px 10px;
   }
+  .ship__1:last-child {
+    padding: 10px 10px 10px;
+  }
   .ship__1--img {
     margin: 0px 10px 0px 0px;
   }
@@ -1178,6 +1194,7 @@ html {
     overflow: hidden;
   }
   .ship__2 {
+    padding: 10px 10px 0px;
     width: 100%;
   }
   .ship .tab {
@@ -1203,10 +1220,33 @@ html {
   }
   .map__text {
     padding: 0px 30px;
+    max-width: none;
   }
 }
 @media (max-width: 566px) {
   .about__right {
     max-width: 200px;
+  }
+}
+@media (max-width: 374px) {
+  .header__logo {
+    grid-column-start: 1;
+    justify-self: start;
+  }
+  .header__right {
+    gap: 12px;
+  }
+  .header__search {
+    max-width: 90px;
+  }
+  .about__right {
+    max-width: 180px;
+  }
+  .map__title {
+    font-size: 38px;
+  }
+  .map__text {
+    padding: 0px 0px;
+    font-size: 24px;
   }
 }
