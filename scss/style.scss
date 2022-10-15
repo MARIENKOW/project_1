@@ -22,7 +22,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 /*! ______ОБНУЛЕНИЕ______ */
 html{
-   background-color: #000;
+   background-color: #181818;
 }
 
 $maxWidth: 1920;
@@ -71,7 +71,7 @@ $color1:rgba(255, 228, 196, 1);
    letter-spacing: 3px;
    height: 20px;
    color: white;
-   background-color: black;
+   background-color: #181818;
    text-align: center;
    display: flex;
    justify-content: center;
@@ -127,7 +127,7 @@ $color1:rgba(255, 228, 196, 1);
             height: 50px;
             width: 100%;
             cursor: auto;
-            background-color: rgb(0, 0, 0);
+            background-color: #181818;
             transition: .1s ease-in 0.2s;
             padding: 10px 20px;
             display: flex;
@@ -141,7 +141,7 @@ $color1:rgba(255, 228, 196, 1);
                visibility:visible;
             }
             .header__title{
-               border-bottom: 3px solid black;
+               border-bottom: 3px solid #181818;
                @media (max-width:768px) {
                   border-bottom:none;
                }
@@ -200,7 +200,7 @@ $color1:rgba(255, 228, 196, 1);
             right: 0;
             width: 100%;
             height: 1px;
-            background-color: black;
+            background-color: #181818;
          }
          &:hover{
             .header__btn{
@@ -297,7 +297,6 @@ $color1:rgba(255, 228, 196, 1);
    top: 0;
    left: 0;
    width: 100%;
-   // background-color: rgba(255, 228, 196, .8);
 }
 //! ///---HEADER---\\\ !\\
 
@@ -716,7 +715,7 @@ $color1:rgba(255, 228, 196, 1);
 .map {
    background-color: #fff;
    &__inner {
-      padding: 30px 0px;
+      padding: 30px 0px 60px 0px;
       display: flex;
       flex-wrap: wrap;
    }
@@ -728,7 +727,7 @@ $color1:rgba(255, 228, 196, 1);
 
    &__right {
       width: 40%;
-      padding: 0px 20px;
+      padding: 0px 0px 0px 40px;
 
    }
 
@@ -747,7 +746,149 @@ $color1:rgba(255, 228, 196, 1);
       max-width: 300px;
    }
 }
+//! ///---MAP---\\\ !\\
 
+/*! ///---MAP---\\\ !*/
+.footer {
+   padding: 20px 0px 0px 0px;
+   background-color: #121212;
+   color: $color1;
+   &__line{
+      width: 100%;
+      // border-bottom: 1px solid #fff;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 9px 0px 25px 0px;
+   }
+   &__coopyright{
+      background-color: #000;
+      font-family: $fontfamily2;
+      color: #fff;
+      padding: 9px 0px;
+      font-size:$fontsize12px ;
+      letter-spacing: 3px;
+      text-align: center;
+      font-weight: 900;
+      text-transform: uppercase;
+   }
+   &__inner {
+      padding: 0px 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+   }
+
+   &__logo {
+      cursor: pointer;
+      height: 50px;
+      transition: .2s;
+      justify-self:center;
+      img{
+         object-fit: cover;
+         height: 100%;
+      }
+      &:hover{
+         transform: scale(1.1);
+      }
+   }
+
+   &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-family: $fontfamily3;
+      font-size: 15px;
+      align-items: flex-start;
+   }
+   &__link{
+      cursor: pointer;
+      position: relative;
+      color: rgba(255, 255, 255, 0.5);
+      transition: .2s;
+      &:hover{
+         color: #fff;
+         transform: scale(1.1);
+         .footer__svg{
+            height: 12px;
+         }
+      }
+   }
+   &__svg{
+      fill: rgba(255, 228, 196, 1);
+      aspect-ratio: 1/1;
+      height: 15px;
+      position: absolute;
+      top: 50%;
+      left: -24px;
+      transform: translateY(-50%);
+      transition: .2s;
+   }
+   
+   &__send {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      form{
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         border: 2px solid rgba(255, 255, 255,0.5);
+         border-radius: 4px;
+         padding: 5px 7px;
+         font-family: $fontfamily3;
+         font-size: 16px;
+         transition: .2s;
+         &:focus-within{
+            // border: 2px solid rgb(255, 255, 255);
+            border: 2px solid rgba(255, 228, 196, 1);
+            .footer__btn{
+               color: #fff;
+               // color:rgba(255, 228, 196, 1);
+            }
+            .footer__prenumber{
+               color: rgba(255, 255, 255, 1);
+               // color:rgba(255, 228, 196, 1);
+            }
+         }
+      }
+   }
+   &__title{
+      text-transform: uppercase;
+      font-family: $fontfamily3;
+      font-size: 24px;
+      text-align: center;
+      margin: 0px 0px 10px 0px;
+      color: $color1;
+      font-weight: 600;
+      letter-spacing: 1px;
+
+   }
+   &__prenumber{
+      transition: .2s;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.5);
+   }
+   &__number{
+      background-color: #181818;
+      color: #fff;
+      letter-spacing: 1px;
+      font-size: 16px;
+      width: 90px;
+   }
+   &__btn{
+      cursor: pointer;
+      background-color: #181818;
+      color: rgba(255, 255, 255,0.5);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 18px;
+      transition: .2s;
+   }
+}
+//! ///---FOOTER---\\\ !\\
+
+/*! ///---FOOTER---\\\ !*/
 
 
 @keyframes arrow{
@@ -769,6 +910,9 @@ $color1:rgba(255, 228, 196, 1);
    100%{transform:rotateX(0deg) scale(1)}
    
 }
+//! ///---ANIMATIONS---\\\ !\\
+
+/*! ///---ANIMATIONS---\\\ !*/
 @media (max-width:768px){
    .header{
       &__inner{
@@ -790,6 +934,7 @@ $color1:rgba(255, 228, 196, 1);
          align-items: flex-start;
          gap: 4px;
          overflow: scroll;
+         height: calc(100vh - 79px);
       }
       &__male,&__female{
          color: #000;
@@ -918,6 +1063,11 @@ $color1:rgba(255, 228, 196, 1);
          }
       }
    }
+   ._fixed{
+      .header__gender{
+         height: calc(100vh - 59px);
+      }
+   }
    .intro{
       margin: 59px 0px 0px 0px;
       background: url(../img/intro/surprised-curly-woman-in-beret-looks-to-left-charming-lady-in-pink-sweater-sunglasses-and-green-skirt-holds-grey-handbag.jpg) center / cover;
@@ -1009,6 +1159,36 @@ $color1:rgba(255, 228, 196, 1);
       &__text{
          padding: 0px 30px;
          max-width: none;
+      }
+   }
+   .footer{
+      &__inner{
+         grid-template-columns: 100%;
+         grid-template-rows: auto 1fr auto;
+         justify-content: start;
+      }
+      &__logo{
+         grid-area:3 / 1 / 4 / 2;
+         justify-self: start;
+         margin: 15px 0px 0 0;
+      }
+      &__send{
+         margin: 0px 0px 0px 0px;
+         grid-area:1 / 1 /2 /2 ;
+         justify-self: start;
+
+      }
+      &__title{
+         text-align: left;
+
+      }
+      &__info{
+         padding: 15px 0px 15px 25px;
+         margin: 15px 0px 0px 0px;
+         border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+         border-top: 1px solid rgba(255, 255, 255, 0.5);
+
+         // justify-self: center;
       }
    }
 }

@@ -88,7 +88,7 @@ input[type=search]::-webkit-search-results-decoration {
 
 /*! ______ОБНУЛЕНИЕ______ */
 html {
-  background-color: #000;
+  background-color: #181818;
 }
 
 .container {
@@ -103,7 +103,7 @@ html {
   letter-spacing: 3px;
   height: 20px;
   color: white;
-  background-color: black;
+  background-color: #181818;
   text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -169,7 +169,7 @@ html {
   height: 50px;
   width: 100%;
   cursor: auto;
-  background-color: rgb(0, 0, 0);
+  background-color: #181818;
   -webkit-transition: 0.1s ease-in 0.2s;
   -o-transition: 0.1s ease-in 0.2s;
   transition: 0.1s ease-in 0.2s;
@@ -190,7 +190,7 @@ html {
   visibility: visible;
 }
 .header__male:hover .header__title, .header__female:hover .header__title {
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid #181818;
 }
 @media (max-width: 768px) {
   .header__male:hover .header__title, .header__female:hover .header__title {
@@ -263,7 +263,7 @@ html {
   right: 0;
   width: 100%;
   height: 1px;
-  background-color: black;
+  background-color: #181818;
 }
 .header__form:hover .header__btn {
   -webkit-animation: header 1s linear;
@@ -819,7 +819,7 @@ html {
   background-color: #fff;
 }
 .map__inner {
-  padding: 30px 0px;
+  padding: 30px 0px 60px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -831,7 +831,7 @@ html {
 }
 .map__right {
   width: 40%;
-  padding: 0px 20px;
+  padding: 0px 0px 0px 40px;
 }
 .map__title {
   font-family: "alumni sans";
@@ -847,6 +847,181 @@ html {
   max-width: 300px;
 }
 
+/*! ///---MAP---\\\ !*/
+.footer {
+  padding: 20px 0px 0px 0px;
+  background-color: #121212;
+  color: rgb(255, 228, 196);
+}
+.footer__line {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 9px 0px 25px 0px;
+}
+.footer__coopyright {
+  background-color: #000;
+  font-family: "amatic sc";
+  color: #fff;
+  padding: 9px 0px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-align: center;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.footer__inner {
+  padding: 0px 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.footer__logo {
+  cursor: pointer;
+  height: 50px;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  justify-self: center;
+}
+.footer__logo img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+}
+.footer__logo:hover {
+  -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1);
+}
+.footer__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  font-family: "alumni sans";
+  font-size: 15px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.footer__link {
+  cursor: pointer;
+  position: relative;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+.footer__link:hover {
+  color: #fff;
+  -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1);
+}
+.footer__link:hover .footer__svg {
+  height: 12px;
+}
+.footer__svg {
+  fill: rgb(255, 228, 196);
+  aspect-ratio: 1/1;
+  height: 15px;
+  position: absolute;
+  top: 50%;
+  left: -24px;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+.footer__send {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.footer__send form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  padding: 5px 7px;
+  font-family: "alumni sans";
+  font-size: 16px;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+.footer__send form:focus-within {
+  border: 2px solid rgb(255, 228, 196);
+}
+.footer__send form:focus-within .footer__btn {
+  color: #fff;
+}
+.footer__send form:focus-within .footer__prenumber {
+  color: rgb(255, 255, 255);
+}
+.footer__title {
+  text-transform: uppercase;
+  font-family: "alumni sans";
+  font-size: 24px;
+  text-align: center;
+  margin: 0px 0px 10px 0px;
+  color: rgb(255, 228, 196);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.footer__prenumber {
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.footer__number {
+  background-color: #181818;
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: 90px;
+}
+.footer__btn {
+  cursor: pointer;
+  background-color: #181818;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 18px;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+
+/*! ///---FOOTER---\\\ !*/
 @-webkit-keyframes arrow {
   0% {
     -webkit-transform: translate3d(-50%, 0, 0);
@@ -861,7 +1036,6 @@ html {
             transform: translate3d(-50%, 0, 0);
   }
 }
-
 @keyframes arrow {
   0% {
     -webkit-transform: translate3d(-50%, 0, 0);
@@ -944,6 +1118,7 @@ html {
             transform: rotateX(0deg) scale(1);
   }
 }
+/*! ///---ANIMATIONS---\\\ !*/
 @media (max-width: 768px) {
   .header__inner {
     grid-template-columns: 1fr 0 1fr;
@@ -972,6 +1147,7 @@ html {
             align-items: flex-start;
     gap: 4px;
     overflow: scroll;
+    height: calc(100vh - 79px);
   }
   .header__male, .header__female {
     color: #000;
@@ -1121,6 +1297,9 @@ html {
         -ms-transform: rotate(0deg);
             transform: rotate(0deg);
   }
+  ._fixed .header__gender {
+    height: calc(100vh - 59px);
+  }
   .intro {
     margin: 59px 0px 0px 0px;
     background: url(../img/intro/surprised-curly-woman-in-beret-looks-to-left-charming-lady-in-pink-sweater-sunglasses-and-green-skirt-holds-grey-handbag.jpg) center/cover;
@@ -1221,6 +1400,32 @@ html {
   .map__text {
     padding: 0px 30px;
     max-width: none;
+  }
+  .footer__inner {
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: start;
+  }
+  .footer__logo {
+    grid-area: 3/1/4/2;
+    justify-self: start;
+    margin: 15px 0px 0 0;
+  }
+  .footer__send {
+    margin: 0px 0px 0px 0px;
+    grid-area: 1/1/2/2;
+    justify-self: start;
+  }
+  .footer__title {
+    text-align: left;
+  }
+  .footer__info {
+    padding: 15px 0px 15px 25px;
+    margin: 15px 0px 0px 0px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
   }
 }
 @media (max-width: 566px) {
