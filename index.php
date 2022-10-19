@@ -47,6 +47,7 @@
          </g>
       </symbol>
    </svg>
+   <?php require 'db.php'; ?>
 </head>
 <body>
    <div class="header--up">
@@ -56,7 +57,7 @@
       <div class="container">
          <div class="header__inner">
             <div class="header__gender">
-               <div class="header__male ">
+               <div class="header__male _hover">
                   <div class="header__title _slider">він
                      <img src="img/header/arrow.svg" alt="arrow" class="header__arrow">
                   </div>
@@ -69,7 +70,7 @@
                      <a href="#" class="header__link">парасольки</a>
                   </div>
                </div>
-               <div class="header__female">
+               <div class="header__female _hover">
                   <div class="header__title _slider">вона
                      <img src="img/header/arrow.svg" alt="arrow" class="header__arrow">
                   </div>
@@ -88,11 +89,11 @@
                <a href="#" class="header__mobile">ремені</a>
                <a href="#" class="header__mobile">парасольки</a>
             </div>
-               <a class="header__logo" href="#">
+               <span class="header__logo index__top">
                   <img src="img/header/logo5.png" alt="logo">
-               </a>
+               </span>
             <div class="header__right">
-               <form class="header__form" action="">
+               <form class="header__form" action="search.php">
                   <input class="header__search" placeholder="пошук" type="search" name="search" id="">
                   <img class="header__btn" src="img/header/search2.svg" alt="пошук">
                </form>
@@ -113,7 +114,7 @@
    <div class="intro">
       <div class="container">
          <div class="intro__inner">
-            <a class="intro__btn" href="#">переглянути<br>всі<br>товари
+            <a class="intro__btn" href="items.php">переглянути<br>всі<br>товари
                <div class="intro__animation">
                   <div class="intro__animation--twist">
                      <img src="img/intro/pngwing.com (2).png" alt="1" class="intro__img">
@@ -140,84 +141,25 @@
       </div>
    </div>
    <div class="slider--up">
-      <div class="slider">
-         <div class="slider__item">
-            <a href="#">
+      <div class="slider sliderSl">
+      <?php
+      $single = get_singles_all();
+      foreach ($single as $singles) { 
+      ?>
+         <div class="slider__item" data-id="<?=$singles['id']?>">
+            <a href="item.php?id=<?php echo $singles['id']; ?>">
                <div class="slider__block">
                   <div class="slider__img">
-                     <img src="img/png.webp" alt="img">
+                     <img src="<?php echo $singles["img"]?>" alt="img">
                   </div>
-                  <div class="slider__title">ФУТБОЛКА DOWNTOWN LOGO MEN'S TEE</div>
-                  <div class="slider__price">2600 грн</div>
+                  <div class="slider__title"><?php echo $singles["title"]?></div>
+                  <div class="slider__price"><?php echo $singles["price"]?></div>
                </div>
             </a>
          </div>
-         <div class="slider__item">
-            <a href="#">
-               <div class="slider__block">
-                  <div class="slider__img">
-                     <img src="img/png.webp" alt="img">
-                  </div>
-                  <div class="slider__title">ФУТБОЛКА DOWNTOWN LOGO MEN'S TEE</div>
-                  <div class="slider__price">2600 грн</div>
-               </div>
-            </a>
-         </div>
-         <div class="slider__item">
-            <a href="#">
-               <div class="slider__block">
-                  <div class="slider__img">
-                     <img src="img/png.webp" alt="img">
-                  </div>
-                  <div class="slider__title">ФУТБОЛКА DOWNTOWN LOGO MEN'S TEE</div>
-                  <div class="slider__price">2600 грн</div>
-               </div>
-            </a>
-         </div>
-         <div class="slider__item">
-            <a href="#">
-               <div class="slider__block">
-                  <div class="slider__img">
-                     <img src="img/png.webp" alt="img">
-                  </div>
-                  <div class="slider__title">ФУТБОЛКА DOWNTOWN LOGO MEN'S TEE</div>
-                  <div class="slider__price">2600 грн</div>
-               </div>
-            </a>
-         </div>
-         <div class="slider__item">
-            <a href="#">
-               <div class="slider__block">
-                  <div class="slider__img">
-                     <img src="img/png.webp" alt="img">
-                  </div>
-                  <div class="slider__title">ФУТБОЛКА DOWNTOWN LOGO MEN'S TEE</div>
-                  <div class="slider__price">2600 грн</div>
-               </div>
-            </a>
-         </div>
-         <div class="slider__item">
-            <a href="#">
-               <div class="slider__block">
-                  <div class="slider__img">
-                     <img src="img/png.webp" alt="img">
-                  </div>
-                  <div class="slider__title">ФУТБОЛКА DOWNTOWN LOGO MEN'S TEE</div>
-                  <div class="slider__price">2600 грн</div>
-               </div>
-            </a>
-         </div>
-         <div class="slider__item">
-            <a href="#">
-               <div class="slider__block">
-                  <div class="slider__img">
-                     <img src="img/png.webp" alt="img">
-                  </div>
-                  <div class="slider__title">ФУТБОЛКА DOWNTOWN LOGO MEN'S TEE</div>
-                  <div class="slider__price">2600 грн</div>
-               </div>
-            </a>
-         </div>
+         <?php
+         }
+         ?> 
       </div>
    </div>
    <div class="about">
@@ -380,12 +322,12 @@
          <div class="container">
             <div class="footer__inner">
                <div class="footer__info">
-                  <div class="footer__link">Головна
+                  <div class="footer__link index__top">Головна
                      <svg class="footer__svg">
                         <use xlink:href="#home"></use>
                      </svg>
                   </div>
-                  <div class="footer__link">Про нас
+                  <div class="footer__link about__top">Про нас
                      <svg class="footer__svg">
                         <use xlink:href="#about"></use>
                      </svg>
@@ -401,7 +343,7 @@
                      </svg>
                   </a>
                </div>
-               <div class="footer__logo">
+               <div class="footer__logo index__top">
                   <img src="img/footer/logo5.png" alt="footerLogo">
                </div>
                <div class="footer__send">
