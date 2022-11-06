@@ -3,7 +3,7 @@ $(document).ready(function () {
       arrows: true,
       dots: true,
       // adaptiveHeight:true,
-      slidesToShow: 6,
+      slidesToShow: 5,
       slidesToScroll: 2,
       speed: 500,
       easing: 'ease-in-out',
@@ -18,12 +18,6 @@ $(document).ready(function () {
       // appendArrows:$('.arrows'),
       responsive: [
          {
-            breakpoint: 1024,
-            settings: {
-               slidesToShow: 4,
-               slidesToScroll: 2,
-            }
-         },{
             breakpoint: 768,
             settings: {
                slidesToShow: 2,
@@ -50,34 +44,6 @@ $(document).ready(function () {
       autoplaySpeed: 5000,
       touchTreshold: 5,
    });
-//! ///---slider---\\\ !\\
-      $("._ajaxClick").click(function(event){
-         $(".body__loading").show();
-         let action = 'data';
-         let gender = get_filter_text('body__gender--check');
-         let kategory = get_filter_text('body__kategory');
-         let size = get_filter_text('body__size');
-         let sort = get_filter_text('body__sortAjax');
-         console.log(sort);
-         $.ajax({
-            url:'action.php',
-            method:'POST',
-            data:{action:action,kategory:kategory,gender:gender,size:size,sort:sort},
-            success:function(response){
-               $(".body__loading").hide();
-               $("#result").html(response);
-            }
-         });
-      });
-   function get_filter_text(text_id){
-      let filterData = [];
-      $('.'+text_id+':checked').each(function(){
-         filterData.push(this.id); 
-      });
-      return filterData;
-   }
-//! ///---Ajax---\\\ !\\
-
 });
 //! ///---jQuery---\\\ !\\
 
@@ -180,42 +146,17 @@ function spoilerFlex() {
    }
 }
 //! ///---SPOILER OPEN/CLOSE---\\\ !\\
-
-const smoothScroll = (element,position,steps)=>{
-   let Y
-   const step =steps || 10;
-   if(element === 0){
-      Y = 0;
-   }else{
-      if(position=='top' || !position){
-         Y = element.offsetTop;
-      }else if(position=='center'){
-         Y = (element.offsetTop+element.offsetHeight/2)-window.innerHeight/2;
-      }else if(position=='bottom'){
-         Y = (element.offsetTop+element.offsetHeight)-window.innerHeight;
-      }
-   }
-   let x = window.scrollY;
-   if(Y>x){
-      const scrlBot = ()=>{
-         window.scrollTo(0,x);
-         x=x+step;
-         if(x>=Y){
-            clearInterval(interval)
-            x=0;
-         }
-      }
-      interval = setInterval(scrlBot,4);
-   }else if(Y<x){
-      const scrlTop = ()=>{
-         window.scrollTo(0,x);
-         x=x-step;
-         if(x<=Y){
-            clearInterval(interval)
-            x=0;
-         }
-      }
-      interval = setInterval(scrlTop,4);
+const swipe = document.querySelector('.intro__swipe');
+const slider = document.querySelector('.slider--up');
+const swipeClick = () => {
+   if (swipe && slider) {
+      swipe.addEventListener('click', function () {
+         slider.scrollIntoView({
+            behavior: 'smooth',
+            block: "start",
+            inline: "nearest"
+         });
+      })
    }
 }
 //! ///---SMOOTH SCROLL---\\\ !\\
@@ -240,47 +181,10 @@ const swipeHiden = () => {
    }
 }
 //! ///---BTN HIDEN/VISIBLE---\\\ !\\
-const swipe = document.querySelector('.intro__swipe');
-const slider = document.querySelector('.slider--up');
-const swipeClick = () => {
-   if (swipe && slider) {
-      swipe.addEventListener('click', function () {
-         smoothScroll(slider,'center');
-      })
-   }
-}
-const indexTop = document.querySelectorAll('.index__top')
-const headerUp = document.querySelector('.header--up');
-const url = window.location.href
-if(indexTop.length>0 ){
-   for(let top of indexTop){
-      top.addEventListener('click',function(){
-         
-         if(url.indexOf('index')!=-1){
-            smoothScroll(0,'top',30);
-         }else{
-            window.location.href = 'index.php'
-         }
-      })
-   }
-}
-const about = document.querySelector('.about');
-const aboutTop = document.querySelector('.about__top');
-
-if(aboutTop && about){
-   aboutTop.addEventListener('click',function(){
-      smoothScroll(about,"center",30);
-   })
-}
-//! ///---add SmoothScroll---\\\ !\\
-
-/*! ///---add SmoothScroll---\\\ !*/
 swipeClick(); //smoothh scroll
 burgerOpen(); //burger open/close
 spoilerFlex(); //ADD spoilers
 headerInnerSearch() //!--------------
-headerFixed();
-
 //! ///---FUNCTIONS CALL---\\\ !\\
 window.addEventListener('scroll', function () {
    swipeHiden();
@@ -295,6 +199,34 @@ window.addEventListener('resize', function () {
    }
 })
 //! ///---FUNCTION CALL ON RESIZE---\\\ !\\
+const indexTop = document.querySelectorAll('.index__top')
+const headerUp = document.querySelector('.header--up');
+if(indexTop.length>0 ){
+   for(let top of indexTop){
+      top.addEventListener('click',function(){
+         window.scrollTo({
+            top:0,
+            behavior:'smooth',
+         })
+      })
+   }
+}
+const about = document.querySelector('.about');
+const aboutTop = document.querySelector('.about__top');
+
+if(aboutTop && about){
+   aboutTop.addEventListener('click',function(){
+      about.scrollIntoView({
+         behavior:"smooth",
+         block: "center",
+         inline: "nearest"
+      })
+   })
+}
+//! ///---scrollIntoView---\\\ !\\
+
+/*! ///---scrollIntoView---\\\ !*/
+
 const hovers = document.querySelectorAll('._hover');
 if(hovers.length>0){
    for(let i = 0;i<hovers.length;i++){
@@ -333,33 +265,3 @@ if(hovers.length>0){
 //! ///---NAVIGATION HOVER---\\\ !\\
 
 /*! ///---NAVIGATION HOVER---\\\ !*/
-const filtrBy = document.querySelectorAll('._filtrByToggle')
-const bodyNav = document.querySelector('.body__nav')
-const bodyCross = document.querySelector('.body__cross')
-if(filtrBy.length>0){
-   for(let filtr of filtrBy){
-      filtr.addEventListener('click',()=>{
-         if(!bodyNav.classList.contains('_open')){
-            bodyNav.classList.add('_open')
-            body.style.overflow = 'hidden';
-            header.classList.add('_hid')
-         }else{
-            bodyNav.classList.remove('_open')
-            body.style.overflow = '';
-            header.classList.remove('_hid')
-         }
-      
-      })
-   }
-}
-// let clickBodySort = new Event('click');
-// bodyList.dispatchEvent(clickBodySort);
-// const xhttp = new XMLHttpRequest();
-// xhttp.onreadystatechange = ()=>{
-//    console.log('dddd');
-//    // if (this.readyState == 4 && this.status == 200){
-//    // }
-// }
-// xhttp.open("POST","http://localhost/kategory.php",true)
-// xhttp.setRequestHeader("value=male");
-// xhttp.send("jjjjj");

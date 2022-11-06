@@ -19,7 +19,7 @@
       </symbol>
       <symbol id="basket" viewBox="0 0 24 24">
          <g>
-            <path d="M5.457 5H3a1 1 0 1 1 0-2h3.273a1 1 0 0 1 .98.8L7.907 7H21a1 1 0 0 1 .982 1.191l-1.311 6.72a2.623 2.623 0 0 1-2.616 2.09L10.12 17c-1.272.024-2.384-.852-2.635-2.087L6.12 8.24a.995.995 0 0 1-.016-.078L5.457 5zm2.86 4l1.128 5.513c.058.283.324.493.657.487h7.971c.314.006.58-.204.636-.48L19.786 9H8.317zM10 19h8a1 1 0 0 1 0 2h-8a1 1 0 0 1 0-2z"></path>
+            <path fill="#181818" fill-rule="nonzero" d="M5.457 5H3a1 1 0 1 1 0-2h3.273a1 1 0 0 1 .98.8L7.907 7H21a1 1 0 0 1 .982 1.191l-1.311 6.72a2.623 2.623 0 0 1-2.616 2.09L10.12 17c-1.272.024-2.384-.852-2.635-2.087L6.12 8.24a.995.995 0 0 1-.016-.078L5.457 5zm2.86 4l1.128 5.513c.058.283.324.493.657.487h7.971c.314.006.58-.204.636-.48L19.786 9H8.317zM10 19h8a1 1 0 0 1 0 2h-8a1 1 0 0 1 0-2z"></path>
          </g>
       </symbol>
       <symbol id="about" viewBox="0 0 96 96">
@@ -62,12 +62,12 @@
                      <img src="img/header/arrow.svg" alt="arrow" class="header__arrow">
                   </div>
                   <div class="header__male--nav">
-                     <a href="kategory.php?value=male" class="header__link">всі товари</a>
-                     <a href="kategory.php?value=male&kategory=bags" class="header__link">сумки</a>
-                     <a href="kategory.php?value=male&kategory=cases" class="header__link">кейси</a>
-                     <a href="kategory.php?value=male&kategory=purse" class="header__link">портмане</a>
-                     <a href="kategory.php?value=male&kategory=belts" class="header__link">ремені</a>
-                     <a href="kategory.php?value=male&kategory=umbrellas" class="header__link">парасольки</a>
+                     <a href="#" class="header__link">всі товари</a>
+                     <a href="#" class="header__link">сумки</a>
+                     <a href="#" class="header__link">кейси</a>
+                     <a href="#" class="header__link">портмане</a>
+                     <a href="#" class="header__link">ремені</a>
+                     <a href="#" class="header__link">парасольки</a>
                   </div>
                </div>
                <div class="header__female _hover">
@@ -75,19 +75,19 @@
                      <img src="img/header/arrow.svg" alt="arrow" class="header__arrow">
                   </div>
                   <div class="header__female--nav">
-                     <a href="kategory.php?value=female" class="header__link">всі товари</a>
-                     <a href="kategory.php?value=female&kategory=bags" class="header__link">сумки</a>
-                     <a href="kategory.php?value=female&kategory=cases" class="header__link">кейси</a>
-                     <a href="kategory.php?value=female&kategory=purse" class="header__link">портмане</a>
-                     <a href="kategory.php?value=female&kategory=belts" class="header__link">ремені</a>
-                     <a href="kategory.php?value=female&kategory=umbrellas" class="header__link">парасольки</a>
+                     <a href="#" class="header__link">всі товари</a>
+                     <a href="#" class="header__link">сумки</a>
+                     <a href="#" class="header__link">кейси</a>
+                     <a href="#" class="header__link">портмане</a>
+                     <a href="#" class="header__link">ремені</a>
+                     <a href="#" class="header__link">парасольки</a>
                   </div>
                </div>
-               <a href="kategory.php?kategory=bags" class="header__mobile">сумки</a>
-               <a href="kategory.php?kategory=cases" class="header__mobile">кейси</a>
-               <a href="kategory.php?kategory=purse" class="header__mobile">портмане</a>
-               <a href="kategory.php?kategory=belts" class="header__mobile">ремені</a>
-               <a href="kategory.php?kategory=umbrellas" class="header__mobile">парасольки</a>
+               <a href="#" class="header__mobile">сумки</a>
+               <a href="#" class="header__mobile">кейси</a>
+               <a href="#" class="header__mobile">портмане</a>
+               <a href="#" class="header__mobile">ремені</a>
+               <a href="#" class="header__mobile">парасольки</a>
             </div>
                <span class="header__logo index__top">
                   <img src="img/header/logo5.png" alt="logo">
@@ -114,7 +114,7 @@
    <div class="intro">
       <div class="container">
          <div class="intro__inner">
-            <a class="intro__btn" href="kategory.php">переглянути<br>всі<br>товари
+            <a class="intro__btn" href="items.php">переглянути<br>всі<br>товари
                <div class="intro__animation">
                   <div class="intro__animation--twist">
                      <img src="img/intro/pngwing.com (2).png" alt="1" class="intro__img">
@@ -146,21 +146,15 @@
       $single = get_singles_all();
       foreach ($single as $singles) { 
       ?>
-         <div data-id="<?=$singles['id']?>" class="body__item slider__item">
-            <a href="item.php?id=<?php echo $singles['id']; ?>" class="body__padding">
-               <div class="body__img">
-                  <img src="<?php echo $singles["img"]?>" alt="img">
+         <div class="slider__item" data-id="<?=$singles['id']?>">
+            <a href="item.php?id=<?php echo $singles['id']; ?>">
+               <div class="slider__block">
+                  <div class="slider__img">
+                     <img src="<?php echo $singles["img"]?>" alt="img">
+                  </div>
+                  <div class="slider__title"><?php echo $singles["title"]?></div>
+                  <div class="slider__price"><?php echo $singles["price"]?></div>
                </div>
-               <div class="body__appellation"><?php echo $singles["title"]?></div>
-               <div class="body__price"><?php echo $singles["price"]?></div>
-               <form class="body__basket" action="post">
-                  <input class="body__checkbox" type="checkbox" name="<?php echo $singles['id']?>" id="<?php echo $singles['id']; ?>">
-                  <label class="body__basket--label" for="<?php echo $singles['id']; ?>">
-                     <svg class="body__basket--svg">
-                        <use xlink:href="#basket"></use>
-                     </svg>
-                  </label>
-               </form>
             </a>
          </div>
          <?php

@@ -13,43 +13,28 @@
 
                         function get_singles_all() {
                             global $connection;
-                            $single =$connection->query("SELECT * from item");
-                            return $single;
+                            $single =$connection->query("select * from item");
+                             return $single;
                         }
-                        
                         function get_single_by_id($id) {
                             global $connection;
-                            $single =$connection->query("SELECT * from item where id =$id");
+                            $single =$connection->query("select * from single where id =$id");
                             foreach ($single as $singles);
-                            return $singles;
+                             return $singles;
                         }
-                        function get_single_by_size() {
+                       function get_single_by_kategory($kategory) {
                             global $connection;
-                            $sizes =$connection->query("SELECT DISTINCT size from item order by size");
-                            return $sizes;
+                            $cats =$connection->query("select * from single where kategory =$kategory");
+                          
+                             return $cats;
                         }
-                        function get_single_by_kategory($value,$kategory) {
-                            global $connection;
-                            if($kategory!=true & $value==true){
-                                $cats =$connection->query("select * from item where $value ='yes'");
-                            }elseif($kategory==true & $value==true){
-                                $cats =$connection->query("select * from item where $value ='yes' and kategory='$kategory'");
-                            }elseif($kategory==true & $value!=true){
-                                $cats =$connection->query("select * from item where kategory='$kategory'");
-                            }elseif($kategory!=true & $value!=true){
-                                $cats =$connection->query("select * from item");
-                            }
-                            return $cats;
-                        }
-
                         function get_single_by_search() {
                             global $connection;
                             if(isset($_POST['submit'])){
                             $search = $_POST['search'];
                             $query = mysqli_query($connect,"select * from single where title like '%$search%'");
                             return $query;}
-                    }
-                    
+                   }
+                   
                         
                         ?>
-                        <!-- &value1=id&kategory1=1 -->
