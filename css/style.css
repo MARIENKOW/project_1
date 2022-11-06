@@ -1330,7 +1330,7 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 2px 0px 10px 0px;
+  padding: 1px 0px 10px 0px;
   border-bottom: 2px solid #000;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
