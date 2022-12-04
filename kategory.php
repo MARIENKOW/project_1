@@ -57,92 +57,61 @@
          </g>
       </symbol>
    </svg>
-   <?php require 'db.php'; ?>
    <?php 
-$cats = get_single_by_kategory($_GET['value'],$_GET['kategory']);
-?>
+      require 'php/db.php';
+      $cats = get_single_by_kategory($_GET['value'],$_GET['kategory'],$_GET['brand'],$_GET['size'],$_GET['color'],$_GET['sort'],$_GET['page']);
+   ?>
 </head>
 <body>
    <div class="header--up">
       <div class="header--up__title">твій кращий вибір</div>
    </div>
-   <header class="header">
-      <div class="container">
-         <div class="header__inner">
-            <div class="header__gender">
-               <div class="header__male _hover">
-                  <div class="header__title _slider">він
-                     <img src="img/header/arrow.svg" alt="arrow" class="header__arrow">
-                  </div>
-                  <div class="header__male--nav">
-                     <a href="kategory.php?value=male" class="header__link">всі товари</a>
-                     <a href="kategory.php?value=male&kategory=bags" class="header__link">сумки</a>
-                     <a href="kategory.php?value=male&kategory=cases" class="header__link">кейси</a>
-                     <a href="kategory.php?value=male&kategory=purse" class="header__link">портмане</a>
-                     <a href="kategory.php?value=male&kategory=belts" class="header__link">ремені</a>
-                     <a href="kategory.php?value=male&kategory=umbrellas" class="header__link">парасольки</a>
-                  </div>
-               </div>
-               <div class="header__female _hover">
-                  <div class="header__title _slider">вона
-                     <img src="img/header/arrow.svg" alt="arrow" class="header__arrow">
-                  </div>
-                  <div class="header__female--nav">
-                     <a href="kategory.php?value=female" class="header__link">всі товари</a>
-                     <a href="kategory.php?value=female&kategory=bags" class="header__link">сумки</a>
-                     <a href="kategory.php?value=female&kategory=cases" class="header__link">кейси</a>
-                     <a href="kategory.php?value=female&kategory=purse" class="header__link">портмане</a>
-                     <a href="kategory.php?value=female&kategory=belts" class="header__link">ремені</a>
-                     <a href="kategory.php?value=female&kategory=umbrellas" class="header__link">парасольки</a>
-                  </div>
-               </div>
-               <a href="kategory.php?kategory=bags" class="header__mobile">сумки</a>
-               <a href="kategory.php?kategory=cases" class="header__mobile">кейси</a>
-               <a href="kategory.php?kategory=purse" class="header__mobile">портмане</a>
-               <a href="kategory.php?kategory=belts" class="header__mobile">ремені</a>
-               <a href="kategory.php?kategory=umbrellas" class="header__mobile">парасольки</a>
-            </div>
-               <span class="header__logo index__top">
-                  <img src="img/header/logo5.png" alt="logo">
-               </span>
-            <div class="header__right">
-               <form class="header__form" action="search.php">
-                  <input class="header__search" placeholder="пошук" type="search" name="search" id="">
-                  <img class="header__btn" src="img/header/search2.svg" alt="пошук">
-               </form>
-               <a class="header__basket" href="#">
-                  <svg class="header__svg">
-                     <use xlink:href="#basket"></use>
-                     <div class="header__count">1</div>
-                  </svg>
-               </a>
-               <div class="header__burger">
-                  <span></span>
-               </div>
-            </div>
-         </div>
-      </div>
-   </header>
-   <div class="body">
+   <?php require 'php/header.php'?>
+   <main class="body">
       <div class="container">
          <div class="body__inner">
             <div class="body__history">
                <a href="index.php" class="body__link">Головна</a>
                <div class="body__arrow">></div>
-               <div class="body__link">
-                  <?php if($_GET['kategory']=='cases' & $_GET['value']=='male'){echo'Чоловічі Кейси';}
-                  elseif($_GET['kategory']=='bags' & $_GET['value']=='male'){echo'Чоловічі Сумки';}
-                  elseif($_GET['kategory']=='purse' & $_GET['value']=='male'){echo'Чоловічі Портмане';}
-                  elseif($_GET['kategory']=='belts' & $_GET['value']=='male'){echo'Чоловічі Ремені';}
-                  elseif($_GET['kategory']=='umbrellas' & $_GET['value']=='male'){echo'Чоловічі Парасольки';}
-                  elseif($_GET['kategory']=='cases' & $_GET['value']=='female'){echo'Жіночі Кейси';}
-                  elseif($_GET['kategory']=='bags' & $_GET['value']=='female'){echo'Жіночі Сумки';}
-                  elseif($_GET['kategory']=='purse' & $_GET['value']=='female'){echo'Жіночі Портмане';}
-                  elseif($_GET['kategory']=='belts' & $_GET['value']=='female'){echo'Жіночі Ремені';}
-                  elseif($_GET['kategory']=='umbrellas' & $_GET['value']=='female'){echo'Жіночі Парасольки';}
-                  elseif($_GET['kategory']!==true& $_GET['value']=='male'){echo'Чоловічі товари';}
-                  elseif($_GET['kategory']!==true& $_GET['value']=='female'){echo'Жіночі товари';}
-                  elseif($_GET['kategory']!==true& $_GET['value']!==true){echo'Всі товари';}
+               <div class="body__link" id="bodyLink">
+                  <?php 
+                  if($_GET['kategory']){
+                     $kategoryName = implode("','",$_GET['kategory']);
+                  }
+                  if($_GET['value']){
+                     $valueName = implode("','",$_GET['value']);
+                  }
+                  if($_GET['sort'] || $_GET['size']){
+                     echo'Товари за фільтром';
+                  }else{
+                     if ($valueName=='male'){
+                        if(!$kategoryName){echo'Чоловічі товари';}
+                        elseif($kategoryName=='cases'){echo'Чоловічі Кейси';}
+                        elseif($kategoryName=='bags'){echo'Чоловічі Сумки';}
+                        elseif($kategoryName=='purse'){echo'Чоловічі Портмане';}
+                        elseif($kategoryName=='belts'){echo'Чоловічі Ремені';}
+                        elseif($kategoryName=='umbrellas'){echo'Чоловічі Парасольки';}
+                        else{echo 'Товари за фільтром';}
+                     }elseif($valueName=='female'){
+                        if(!$kategoryName){echo'Жіночі товари';}
+                        elseif($kategoryName=='cases'){echo'Жіночі Кейси';}
+                        elseif($kategoryName=='bags'){echo'Жіночі Сумки';}
+                        elseif($kategoryName=='purse'){echo'Жіночі Портмане';}
+                        elseif($kategoryName=='belts'){echo'Жіночі Ремені';}
+                        elseif($kategoryName=='umbrellas'){echo'Жіночі Парасольки';}
+                        else{echo 'Товари за фільтром';}
+                     }elseif(!$valueName){
+                        if(!$kategoryName){echo'Всі товари';}
+                        elseif($kategoryName=='cases'){echo'Кейси';}
+                        elseif($kategoryName=='bags'){echo'Сумки';}
+                        elseif($kategoryName=='purse'){echo'Портмане';}
+                        elseif($kategoryName=='belts'){echo'Ремені';}
+                        elseif($kategoryName=='umbrellas'){echo'Парасольки';}
+                        else{echo 'Товари за фільтром';}
+                     }else{
+                        echo'Товари за фільтром';
+                     }
+                  }
                   ?>
                </div>
             </div>
@@ -185,59 +154,57 @@ $cats = get_single_by_kategory($_GET['value'],$_GET['kategory']);
                         <div class="body__blind">
                            <div class="body__wrapper">
                               <div class="body__choise">
-                                 <input class="body__checkbox _ajaxClick body__sortAjax" type="radio" name="size" id="sizeDown">
+                                 <input class="body__checkbox _ajaxClick body__sortAjax" <?php if($_GET['sort']){foreach($_GET['sort'] as $sort){ if($sort=='sizeDown'){echo'checked="yes"';}}} ?> type="radio" name="size" id="sizeDown">
                                  <label class="body__label" for="sizeDown">Ціною за зменшенням</label>
                               </div>
                               <div class="body__choise">
-                                 <input class="body__checkbox _ajaxClick body__sortAjax" type="radio" name="size" id="sizeUp">
+                                 <input class="body__checkbox _ajaxClick body__sortAjax" <?php if($_GET['sort']){foreach($_GET['sort'] as $sort){ if($sort=='sizeUp'){echo'checked="yes"';}}} ?> type="radio" name="size" id="sizeUp">
                                  <label class="body__label" for="sizeUp">Ціною за збільшенням</label>
                               </div>
                            </div>
                         </div>
                      </div>
                      <div class="body__filtr">
-                        <div class="body__name _slider">категорія</div>
+                        <div class="body__name _sliderNoResize">категорія</div>
                         <div class="body__blind">
                            <div class="body__wrapper">
                               <div class="body__choise">
-                                 <input class="body__checkbox _ajaxClick body__kategory" type="checkbox" name="bags" id="bags">
+                                 <input class="body__checkbox _ajaxClick body__kategory" <?php if($_GET['kategory']){foreach($_GET['kategory'] as $kategory){ if($kategory=='bags'){echo'checked="yes"';}}}?> type="checkbox" name="bags" id="bags">
                                  <label class="body__label" for="bags">сумки</label>
                               </div>
                               <div class="body__choise">
-                                 <input class="body__checkbox _ajaxClick body__kategory" type="checkbox" name="cases" id="cases">
+                                 <input class="body__checkbox _ajaxClick body__kategory"  <?php if($_GET['kategory']){foreach($_GET['kategory'] as $kategory){ if($kategory=='cases'){echo'checked="yes"';}}}?>  type="checkbox" name="cases" id="cases">
                                  <label class="body__label" for="cases">кейси</label>
                               </div>
                               <div class="body__choise">
-                                 <input class="body__checkbox _ajaxClick body__kategory" type="checkbox" name="purse" id="purse">
+                                 <input class="body__checkbox _ajaxClick body__kategory"  <?php if($_GET['kategory']){foreach($_GET['kategory'] as $kategory){ if($kategory=='purse'){echo'checked="yes"';}}}?>  type="checkbox" name="purse" id="purse">
                                  <label class="body__label" for="purse">портмане</label>
                               </div>
                               <div class="body__choise">
-                                 <input class="body__checkbox _ajaxClick body__kategory" type="checkbox" name="belts" id="belts">
+                                 <input class="body__checkbox _ajaxClick body__kategory"  <?php if($_GET['kategory']){foreach($_GET['kategory'] as $kategory){ if($kategory=='belts'){echo'checked="yes"';}}}?>  type="checkbox" name="belts" id="belts">
                                  <label class="body__label" for="belts">ремені</label>
                               </div>
                               <div class="body__choise">
-                                 <input class="body__checkbox _ajaxClick body__kategory" type="checkbox" name="umbrellas" id="umbrellas">
+                                 <input class="body__checkbox _ajaxClick body__kategory"  <?php if($_GET['kategory']){foreach($_GET['kategory'] as $kategory){ if($kategory=='umbrellas'){echo'checked="yes"';}}}?> type="checkbox" name="umbrellas" id="umbrellas">
                                  <label class="body__label" for="umbrellas">парасольки</label>
                               </div>
                            </div>
-                           
                         </div>
                      </div>
                      <div class="body__filtr">
-                        <div class="body__name _slider">стать</div>
+                        <div class="body__name _sliderNoResize">стать</div>
                         <div class="body__blind">
                            <div class="body__wrapper">
                               <div class="body__choise">
-                                 <input class="body__checkbox _ajaxClick body__gender--check" type="checkbox" name="male" id="male">
+                                 <input class="body__checkbox _ajaxClick body__gender--check"  <?php if($_GET['value']){foreach($_GET['value'] as $value){ if($value=='male'){echo'checked="yes"';}}}?> type="radio" name="gender" id="male">
                                  <label class="body__label body__label--gender" for="male">чоловік
                                     <svg class="body__svg body__svg--male">
                                        <use xlink:href="#maleSvg"></use>
                                     </svg>
                                  </label>
-                                 
                               </div>
                               <div class="body__choise">
-                                 <input class="body__checkbox _ajaxClick body__gender--check" type="checkbox" name="female" id="female">
+                                 <input class="body__checkbox _ajaxClick body__gender--check" <?php if($_GET['value']){foreach($_GET['value'] as $value){ if($value=='female'){echo'checked="yes"';}}}?> type="radio" name="gender" id="female">
                                  <label class="body__label body__label--gender" for="female">жінка
                                     <svg class="body__svg">
                                        <use xlink:href="#femaleSvg"></use>
@@ -248,38 +215,60 @@ $cats = get_single_by_kategory($_GET['value'],$_GET['kategory']);
                         </div>
                      </div>
                      <div class="body__filtr">
-                        <div class="body__name _slider">розмір</div>
+                        <div class="body__name _sliderNoResize">бренд</div>
                         <div class="body__blind">
-                           <div class="body__wrapper body__wrapper--size">
+                           <div class="body__wrapper">
                               <?php 
-                                 $sizes = get_single_by_size();
-                                 foreach($sizes as $size){
-
+                                 $brands = get_single_by_brand();
+                                 foreach($brands as $brand){
                               ?>
-                              <div class="body__choise body__choise--size">
-                                 <input class="body__checkbox _ajaxClick body__size" type="checkbox" name="<?= $size['size'] ?>" id="<?= $size['size'] ?>">
-                                 <label class="body__label body__label--size" for="<?= $size['size'] ?>"><?= $size['size'] ?></label>
+                              <div class="body__choise">
+                                 <input class="body__checkbox _ajaxClick body__brand" <?php if($_GET['brand']){foreach($_GET['brand'] as $brandC){ if($brandC==$brand['brand']){echo'checked="yes"';}}}?> type="checkbox" name="<?= $brand['brand'] ?>" id="<?= $brand['brand'] ?>">
+                                 <label class="body__label" for="<?= $brand['brand'] ?>"><?= $brand['brand'] ?></label>
                               </div>
                               <?php }?>
                            </div>
                         </div>
                      </div>
+                     <div class="body__filtr">
+                        <div class="body__name _sliderNoResize">розмір</div>
+                        <div class="body__blind">
+                           <div class="body__wrapper body__wrapper--size">
+                              <?php 
+                                 $sizes = get_single_by_size();
+                                 foreach($sizes as $size){
+                              ?>
+                              <div class="body__choise body__choise--size">
+                                 <input class="body__checkbox _ajaxClick body__size" <?php if($_GET['size']){foreach($_GET['size'] as $sizeC){ if($sizeC==$size['name']){echo'checked="yes"';}}}?> type="checkbox" name="<?= $size['name'] ?>" id="<?= $size['name'] ?>">
+                                 <label class="body__label body__label--size" for="<?= $size['name'] ?>"><?= $size['name'] ?></label>
+                              </div>
+                              <?php }?>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="body__filtr">
+                        <div class="body__name body__name--no">Колір</div>
+                        <div class="body__blind">
+                           <div class="body__wrapper body__wrapper--size body__wrapper--color">
+                              <?php 
+                                 $colors = get_single_by_color();
+                                 foreach($colors as $color){
+                              ?>
+                              <div class="body__choise body__choise--color">
+                                 <input class="body__checkbox _ajaxClick body__color" <?php if($_GET['color']){foreach($_GET['color'] as $colorC){$colorC ="#$colorC"; if($colorC==$color['color']){echo'checked="yes"';}}}?> type="checkbox" name="<?= $color['color'] ?>"
+                                 id="<?= $color['color'] ?>">
+                                 <label class="body__label body__label--color" style = "background-color:<?php echo $color['color']?>" for="<?= $color['color'] ?>"></label>
+                              </div>
+                              <?php }?>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="_ajaxClick body__checkboxBtn">скинути все</div>
                   </div>
                </div>
                <div class="body__block">
                   <div class="body__sort">
-
                      <div class="body__title body__filtrBy _filtrByToggle">Фільтр/Сортування</div>
-                     <!-- <span class="body__sort--in">
-                        <div class="body__title body__title--sort">Сортувати за</div> -->
-                        <!-- <select class="body__list" name="body__list">
-                           <option class="body__option _ajaxClick" value="1">Ціною:за зменшенням</option>
-                           <option class="body__option _ajaxClick" value="2">Ціною:за збільшенням</option>
-                        </select> -->
-                        <!-- <div class="body__hide">
-
-                        </div>
-                     </span> -->
                   </div>
                   <div class="body__items">
                      <div class="body__loading" style="display:none;">
@@ -300,80 +289,45 @@ $cats = get_single_by_kategory($_GET['value'],$_GET['kategory']);
                         <?php 
                         foreach ($cats as $cat): 
                         ?>
-                        <div data-id="<?=$cat['id']?>" class="body__item">
-                           <a href="item.php?id=<?php echo $cat['id']; ?>" class="body__padding">
+                        <div class="body__item">
+                           <a href="item.php?id=<?php echo $cat['id'];?>" 
+                           class="body__padding">
                               <div class="body__img">
-                                 <img src="<?php echo $cat["img"]?>" alt="img">
+                                 <img src="<?php echo $cat["location"]?>" alt="img">
                               </div>
                               <div class="body__appellation"><?php echo $cat["title"]?></div>
                               <div class="body__price"><?php echo $cat["price"]?></div>
-                              <form class="body__basket" action="post">
-                                 <input class="body__checkbox" type="checkbox" name="<?php echo $cat['id']?>" id="<?php echo $cat['id']; ?>">
-                                 <label class="body__basket--label" for="<?php echo $cat['id']; ?>">
-                                    <svg class="body__basket--svg">
-                                       <use xlink:href="#basket"></use>
-                                    </svg>
-                                 </label>
-                              </form>
                            </a>
                         </div>
                         <?php endforeach;?>
                      </div>
                   </div>
+                  <div id="result2" class="body__pagination">
+                     <?php
+                     $paginationArr = get_single_by_kategory($_GET['value'],$_GET['kategory'],$_GET['brand'],$_GET['size'],$_GET['color'],$_GET['sort'],'all');
+                     if(mysqli_num_rows($paginationArr)>0){
+                        $allItems = mysqli_num_rows($paginationArr);
+                        $pages = ceil($allItems / $itemsOnPage);
+                        if($pages>1){
+                           for($i=1;$i<=$pages;$i++){
+                              ?>
+                              <div class="body__number ajaxPaginationClick">
+                                 <input class="body__checkbox _ajaxClick  body__numberCheck" <?php if($_GET['page']){if($_GET['page']==[$i]){echo'checked="yes"';}}else{if([$i]==[1]){echo'checked="yes"';}}?>  type="radio" name="pages" id="<?php echo "page$i"; ?>">
+                                 <label class="body__label pagination__label" for="<?php echo "page$i"; ?>"><?php echo $i; ?></label>
+                              </div>
+                              <?php
+                           }
+                        }
+                     };
+                     ?>
+                  </div>
                </div>
             </div>
          </div>
       </div>
-   </div>
-   <footer class="footer">
-      <div class="footer__line">
-         <div class="container">
-            <div class="footer__inner">
-               <div class="footer__info">
-                  <div class="footer__link index__top">Головна
-                     <svg class="footer__svg">
-                        <use xlink:href="#home"></use>
-                     </svg>
-                  </div>
-                  <div class="footer__link about__top">Про нас
-                     <svg class="footer__svg">
-                        <use xlink:href="#about"></use>
-                     </svg>
-                  </div>
-                  <a target="_blank" href="https://www.google.com/maps/place/%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D1%83%D0%BD%D0%B8%D0%B2%D0%B5%D1%80%D0%BC%D0%B0%D0%B3/@50.906749,34.796622,16z/data=!4m5!3m4!1s0x0:0xdc737b63790a2531!8m2!3d50.9067489!4d34.7966222?hl=ru" class="footer__link">Покровська площа 3
-                     <svg class="footer__svg">
-                        <use xlink:href="#geo"></use>
-                     </svg>
-                  </a>
-                  <a href="tel:+380957748111" class="footer__link">+380957748111
-                     <svg class="footer__svg">
-                        <use xlink:href="#phone"></use>
-                     </svg>
-                  </a>
-               </div>
-               <div class="footer__logo index__top">
-                  <img src="img/footer/logo5.png" alt="footerLogo">
-               </div>
-               <div class="footer__send">
-                  <div class="footer__title">Ми вам передзвонимо</div>
-                  
-                  <form  action="">
-                     <div class="footer__prenumber">+380</div>
-                     
-                     <input class="footer__number" placeholder=" - - - - - - - -" type="tel" name="number" id="">
-                     <input class="footer__btn" type="submit" value="надіслати">
-                  </form>
-               </div>
-
-
-            </div>
-            
-         </div>
-      </div>
-      
-      <div class="footer__coopyright">All Rights Reserved © BORSA, 2022</div>
-      
-   </footer>
+   </main>
+   <?php require 'php/basket.php'?>
+   <?php require 'php/footer.php'?>
    <script src="jQuery/jquery-3.6.1.min.js"></script>
    <script src="js/slick.min.js"></script>
    <script src="js/app.js"></script>

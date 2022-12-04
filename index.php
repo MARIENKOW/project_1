@@ -47,69 +47,13 @@
          </g>
       </symbol>
    </svg>
-   <?php require 'db.php'; ?>
+   <?php require 'php/db.php'; ?>
 </head>
 <body>
    <div class="header--up">
       <div class="header--up__title">твій кращий вибір</div>
    </div>
-   <header class="header">
-      <div class="container">
-         <div class="header__inner">
-            <div class="header__gender">
-               <div class="header__male _hover">
-                  <div class="header__title _slider">він
-                     <img src="img/header/arrow.svg" alt="arrow" class="header__arrow">
-                  </div>
-                  <div class="header__male--nav">
-                     <a href="kategory.php?value=male" class="header__link">всі товари</a>
-                     <a href="kategory.php?value=male&kategory=bags" class="header__link">сумки</a>
-                     <a href="kategory.php?value=male&kategory=cases" class="header__link">кейси</a>
-                     <a href="kategory.php?value=male&kategory=purse" class="header__link">портмане</a>
-                     <a href="kategory.php?value=male&kategory=belts" class="header__link">ремені</a>
-                     <a href="kategory.php?value=male&kategory=umbrellas" class="header__link">парасольки</a>
-                  </div>
-               </div>
-               <div class="header__female _hover">
-                  <div class="header__title _slider">вона
-                     <img src="img/header/arrow.svg" alt="arrow" class="header__arrow">
-                  </div>
-                  <div class="header__female--nav">
-                     <a href="kategory.php?value=female" class="header__link">всі товари</a>
-                     <a href="kategory.php?value=female&kategory=bags" class="header__link">сумки</a>
-                     <a href="kategory.php?value=female&kategory=cases" class="header__link">кейси</a>
-                     <a href="kategory.php?value=female&kategory=purse" class="header__link">портмане</a>
-                     <a href="kategory.php?value=female&kategory=belts" class="header__link">ремені</a>
-                     <a href="kategory.php?value=female&kategory=umbrellas" class="header__link">парасольки</a>
-                  </div>
-               </div>
-               <a href="kategory.php?kategory=bags" class="header__mobile">сумки</a>
-               <a href="kategory.php?kategory=cases" class="header__mobile">кейси</a>
-               <a href="kategory.php?kategory=purse" class="header__mobile">портмане</a>
-               <a href="kategory.php?kategory=belts" class="header__mobile">ремені</a>
-               <a href="kategory.php?kategory=umbrellas" class="header__mobile">парасольки</a>
-            </div>
-               <span class="header__logo index__top">
-                  <img src="img/header/logo5.png" alt="logo">
-               </span>
-            <div class="header__right">
-               <form class="header__form" action="search.php">
-                  <input class="header__search" placeholder="пошук" type="search" name="search" id="">
-                  <img class="header__btn" src="img/header/search2.svg" alt="пошук">
-               </form>
-               <a class="header__basket" href="#">
-                  <svg class="header__svg">
-                     <use xlink:href="#basket"></use>
-                     <div class="header__count">1</div>
-                  </svg>
-               </a>
-               <div class="header__burger">
-                  <span></span>
-               </div>
-            </div>
-         </div>
-      </div>
-   </header>
+   <?php require 'php/header.php'?>
    <div class="click"></div>
    <div class="intro">
       <div class="container">
@@ -147,20 +91,16 @@
       foreach ($single as $singles) { 
       ?>
          <div data-id="<?=$singles['id']?>" class="body__item slider__item">
-            <a href="item.php?id=<?php echo $singles['id']; ?>" class="body__padding">
+            <a href="item.php?id=<?php
+            $idSingles=$singles['id'];
+            $kategorySingles=$singles['kategory'];
+            echo "$idSingles&kategory=$kategorySingles"; 
+            ?>" class="body__padding">
                <div class="body__img">
-                  <img src="<?php echo $singles["img"]?>" alt="img">
+                  <img src="<?php echo $singles["location"]?>" alt="img">
                </div>
                <div class="body__appellation"><?php echo $singles["title"]?></div>
                <div class="body__price"><?php echo $singles["price"]?></div>
-               <form class="body__basket" action="post">
-                  <input class="body__checkbox" type="checkbox" name="<?php echo $singles['id']?>" id="<?php echo $singles['id']; ?>">
-                  <label class="body__basket--label" for="<?php echo $singles['id']; ?>">
-                     <svg class="body__basket--svg">
-                        <use xlink:href="#basket"></use>
-                     </svg>
-                  </label>
-               </form>
             </a>
          </div>
          <?php
@@ -178,6 +118,20 @@
                </div>
             </div>
          </div>
+      </div>
+   </div>
+   <div class="map">
+      <div class="container">
+         <div class="map__inner">
+            
+            <div class="map__right">
+               <div class="map__title">де нас можна знайти?</div>
+               <div class="map__text">Наш магазин знаходиться на 2 поверсі Центрального універмагу за адресою Покровська площа 3</div>
+            </div>
+            <iframe class="map__geo" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1362.328809594581!2d34.796266994482956!3d50.90680950969917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4129018bddb2dbd3%3A0xdc737b63790a2531!2z0KbQtdC90YLRgNCw0LvRjNC90YvQuSDRg9C90LjQstC10YDQvNCw0LM!5e0!3m2!1sru!2sua!4v1665442053291!5m2!1sru!2sua"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+         </div>
+         
       </div>
    </div>
    <div class="ship" id="ship">
@@ -311,67 +265,8 @@
          </div>
       </div>
    </div>
-   <div class="map">
-      <div class="container">
-         <div class="map__inner">
-            <iframe class="map__geo" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1362.328809594581!2d34.796266994482956!3d50.90680950969917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4129018bddb2dbd3%3A0xdc737b63790a2531!2z0KbQtdC90YLRgNCw0LvRjNC90YvQuSDRg9C90LjQstC10YDQvNCw0LM!5e0!3m2!1sru!2sua!4v1665442053291!5m2!1sru!2sua"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            <div class="map__right">
-               <div class="map__title">де нас можна знайти?</div>
-               <div class="map__text">Наш магазин знаходиться на 2 поверсі Центрального універмагу за адресою Покровська площа 3</div>
-            </div>
-         </div>
-         
-      </div>
-   </div>
-   <footer class="footer">
-      <div class="footer__line">
-         <div class="container">
-            <div class="footer__inner">
-               <div class="footer__info">
-                  <div class="footer__link index__top">Головна
-                     <svg class="footer__svg">
-                        <use xlink:href="#home"></use>
-                     </svg>
-                  </div>
-                  <div class="footer__link about__top">Про нас
-                     <svg class="footer__svg">
-                        <use xlink:href="#about"></use>
-                     </svg>
-                  </div>
-                  <a target="_blank" href="https://www.google.com/maps/place/%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D1%83%D0%BD%D0%B8%D0%B2%D0%B5%D1%80%D0%BC%D0%B0%D0%B3/@50.906749,34.796622,16z/data=!4m5!3m4!1s0x0:0xdc737b63790a2531!8m2!3d50.9067489!4d34.7966222?hl=ru" class="footer__link">Покровська площа 3
-                     <svg class="footer__svg">
-                        <use xlink:href="#geo"></use>
-                     </svg>
-                  </a>
-                  <a href="tel:+380957748111" class="footer__link">+380957748111
-                     <svg class="footer__svg">
-                        <use xlink:href="#phone"></use>
-                     </svg>
-                  </a>
-               </div>
-               <div class="footer__logo index__top">
-                  <img src="img/footer/logo5.png" alt="footerLogo">
-               </div>
-               <div class="footer__send">
-                  <div class="footer__title">Ми вам передзвонимо</div>
-                  
-                  <form  action="">
-                     <div class="footer__prenumber">+380</div>
-                     
-                     <input class="footer__number" placeholder=" - - - - - - - -" type="tel" name="number" id="">
-                     <input class="footer__btn" type="submit" value="надіслати">
-                  </form>
-               </div>
-
-
-            </div>
-            
-         </div>
-      </div>
-      
-      <div class="footer__coopyright">All Rights Reserved © BORSA, 2022</div>
-      
-   </footer>
+   <?php require 'php/basket.php'?>
+   <?php require 'php/footer.php'?>
    <script src="jQuery/jquery-3.6.1.min.js"></script>
    <script src="js/slick.min.js"></script>
    <script src="js/app.js"></script>
