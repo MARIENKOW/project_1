@@ -29,10 +29,10 @@
                </div>
                <div class="footer__send">
                   <div class="footer__title">Ми вам передзвонимо</div>
-                  <form  action="">
-                     <div class="footer__prenumber">+380</div>
-                     <input class="footer__number" placeholder=" - - - - - - - -" type="tel" name="number" id="">
-                     <input class="footer__btn" type="submit" value="надіслати">
+                  <form>
+                     <div class="footer__prenumber">+38</div>
+                     <input class="footer__number clientNumber" placeholder=" - - - - - - - - -" type="tel" name="number">
+                     <input id="clientNumberBtn" class="footer__btn" type="submit" value="надіслати">
                   </form>
                </div>
             </div>

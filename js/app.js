@@ -1,47 +1,3 @@
-const pagination = (parrentClass) => {
-   const parrent = document.querySelector(parrentClass);
-   if (parrent) {
-      let checkedElement
-      const paginationParrentLength = parrent.children.length;
-      for (let i = 0; i < paginationParrentLength; i++) {
-         if (parrent.children[i].firstElementChild.checked) {
-            checkedElement = i;
-         }
-      }
-      for (let i = paginationParrentLength - 1; i >= 0; i--) {
-
-         if (checkedElement < paginationParrentLength - 4 && i < paginationParrentLength - 1 && i > checkedElement + 1 || checkedElement > 3 && i != 0 && i < checkedElement - 1) {
-            parrent.children[i].remove();
-         }
-      }
-      if (checkedElement < paginationParrentLength - 4) {
-         parrent.lastElementChild.before('...');
-      }
-      if (checkedElement > 3) {
-         parrent.firstElementChild.after('...');
-      }
-   }
-}
-const imgClick = (img, parent) => {
-   const popapClick = document.querySelectorAll(img);
-   const popap = document.querySelector(parent);
-   if (popapClick.length > 0) {
-      for (let popapClickItem of popapClick) {
-         popapClickItem.addEventListener('click', () => {
-            if (popap) {
-               if (!popap.classList.contains('_popapActive')) {
-                  popap.classList.add('_popapActive');
-                  body.style.overflow = 'hidden';
-               } else {
-                  popap.classList.remove('_popapActive');
-                  body.style.overflow = '';
-               }
-            }
-         })
-      }
-   }
-}
-
 $(document).ready(function () {
    $('.sliderSl').slick({
       arrows: true,
@@ -181,29 +137,36 @@ $(document).ready(function () {
       autoplaySpeed: 5000,
       touchTreshold: 5,
    });
-   //! ///---sliders---\\\ !\\
-   $("._ajaxClick").click(ajaxGo);
-   $("._ajaxColorClick").click(ajaxColorGo);
-   $("._basketItemClick").click(basketArr);
-   $(".basketSize").click(removeAlert);
 
+   //! ///---sliders---\\\ !\\
+
+   $("._basketItemClick").click(basketArr);
+   $(".basketSize").click(btnSizeClick);
    function basketArr() {
+      // проверка сколько размеров товара и выбран ли он
       if ($(".basketSize").length > 1) {
          if ($('.basketSize:checked').length > 0) {
+            if(!$("#btnBasket").hasClass("_in")){
+               $("#btnBasket").addClass("_loading");
+            }
             ObjectByPhp(".main__btnName", localInner);
          } else {
             const alertSize = document.querySelector(".main__size--alert");
             alertSize.classList.add("_alertActive");
          }
       } else {
+         if(!$("#btnBasket").hasClass("_in")){
+            $("#btnBasket").addClass("_loading");
+         }
          ObjectByPhp(".main__btnName", localInner);
       }
    }
    function ObjectByPhp(clas, func) {
+      // получение обьекта товара с выбранным рамзером
       const id = [document.querySelector(clas).id]
       let obj;
       $.ajax({
-         url: 'php/basket/bbt.php',
+         url: 'php/basket/objectForBasket.php',
          method: 'POST',
          data: { id: id },
          success: function (response) {
@@ -214,6 +177,7 @@ $(document).ready(function () {
       });
    }
    function localInner(item) {
+      // проверка есть ли товар в корзине и изменение кнопки после добавления
       function findId(Arr) {
          return Arr.id === item.id && Arr.size === item.size
       }
@@ -221,16 +185,19 @@ $(document).ready(function () {
       if (localStorage.getItem('cart')) {
          idArr = JSON.parse(localStorage.getItem('cart'));
          if (idArr.find(findId)) {
-            btnChange(".main__btnName",1);
+            basketBtn()
+            $("#btnBasket").removeClass("_loading");
          } else {
             idArr.push(item);
             localStorage.setItem('cart', JSON.stringify(idArr));
-            btnChange(".main__btnName",1);
+            basketBtn()
+            $("#btnBasket").removeClass("_loading");
          }
       } else {
          idArr.push(item);
          localStorage.setItem('cart', JSON.stringify(idArr));
-         btnChange(".main__btnName",1);
+         basketBtn()
+         $("#btnBasket").removeClass("_loading");
       }
       ajaxBasketGo();
    }
@@ -238,49 +205,59 @@ $(document).ready(function () {
       if (localStorage.getItem('cart')) {
          const cart = JSON.parse(localStorage.getItem('cart'));
          const basketResult = document.getElementById('resultBasket')
-         let sum = 0;
-         basketResult.innerHTML = "";
-         for (cartItem of cart) {
-            const text = `
-               <a href="item.php?id=${cartItem.id}" class="basket__item">
-                  <div class="basket__item--main">
-                     <div class="basket__photo">
-                        <img src="../${cartItem.img}" alt="basketPhoto">
-                     </div>
-                     <div class="basket__info">
-                        <div class="basket__name">${cartItem.title}</div>
-                        <section class="basket__about">
-                           <div class="basket__table">
-                              <span>колір:</span>
-                              <span class="basket__value basket__value--color" style = "background-color:${cartItem.color}"></span>
+            if(cart.length>0){
+               let sum = 0;
+               basketResult.innerHTML = "";
+               for (let i = 0; i<cart.length;i++) {
+                  const text = `
+                     <div class="basket__item">
+                        <div class="basket__item--main">
+                           <div class="basket__photo">
+                              <img src="../${cart[i].img}" alt="basketPhoto">
                            </div>
-                           <div class="basket__table">
-                              <span>розмір:</span>
-                              <span class="basket__value">${cartItem.size}</span>
+                           <div class="basket__info">
+                              <a href="item.php?id=${cart[i].id}" class="basket__name">${cart[i].title}</a>
+                              <section class="basket__about">
+                                 <div class="basket__table">
+                                    <span>колір:</span>
+                                    <span class="basket__value basket__value--color" style = "background-color:${cart[i].color}"></span>
+                                 </div>
+                                 <div class="basket__table">
+                                    <span>розмір:</span>
+                                    <span class="basket__value">${cart[i].size}</span>
+                                 </div>
+                                 
+                                 <div class="basket__table">
+                                    <span>артикул:</span>
+                                    <span class="basket__value">${cart[i].artkl}</span>
+                                 </div>
+                              </section>
                            </div>
-                           
-                           <div class="basket__table">
-                              <span>артикул:</span>
-                              <span class="basket__value">${cartItem.artkl}</span>
-                           </div>
-                        </section>
-                     </div>
-                  </div>
-                  <div class="basket__item--bottom">
-                     <div class="basket__itemLeft">Вартість</div>
-                     <div class="basket__itemRight">${cartItem.price}</div>
-                  </div>
-               </a>`;
-            basketResult.insertAdjacentHTML('beforeend', text);
-            sum += Number(cartItem.price);
-         }
-         $("#basketCount").html(`<div class="header__count--in">${cart.length}</div>`);
-         $("#basketCountIn").html(cart.length);
-         $("#basketSum").html(sum);
+                        </div>
+                        <div class="basket__item--bottom">
+                           <div class="basket__itemLeft">Вартість</div>
+                           <div class="basket__itemRight">${cart[i].price}</div>
+                        </div>
+                        <div id="${i}" class="basket__item--cross _basketRemoveItem"><span></span></div>
+                     </div>`;
+                  basketResult.insertAdjacentHTML('beforeend', text);
+                  sum += Number(cart[i].price);
+               }
+               $("#basketCount").html(`<div class="header__count--in">${cart.length}</div>`);
+               $("#basketCountIn").html(cart.length);
+               $("#basketSum").html(sum);
+               $("._basketRemoveItem").click(basketRemove);
+            }else{
+               $(".basket").removeClass("_basketTogle");
+               $("#basketCount").html(``);
+               $('#resultBasket').html('')
+               $("#basketCountIn").html('');
+               $("#basketSum").html('');
+            }
       }
    }
    function basketBtn() {
-
+      // проверка есть ли товар в корзине и изиенение кнопка(при загрузке страницы и нажатии на кнопку размера)
       if (localStorage.getItem('cart') && $("._basketItemClick").length>0) {
          const itemId = document.querySelector('.main__btnName');
          function findId(Arr) {
@@ -299,6 +276,8 @@ $(document).ready(function () {
             let Arr = JSON.parse(localStorage.getItem('cart'));
             if (Arr.find(findId)) {
                btnChange(".main__btnName",1);
+            }else{
+               btnChange(".main__btnName",2);
             }
          }
       }
@@ -308,11 +287,43 @@ $(document).ready(function () {
       if(text === 1){
          btnDom.innerHTML = "додано";
          $("#btnSvg").html('<use  xlink:href="#pass"></use>')
+         $("#btnBasket").addClass("_in");
       }else{
          btnDom.innerHTML = "до кошика";
          $("#btnSvg").html('<use  xlink:href="#basket"></use>')
+         $("#btnBasket").removeClass("_in");
       }
    }
+   function basketRemove(){
+      let cart = JSON.parse(localStorage.getItem('cart'));
+      cart.splice(this.id,1);
+      localStorage.setItem('cart',JSON.stringify(cart));
+      ajaxBasketGo();
+      basketBtn();
+   }
+   function btnSizeClick () {
+      const alertSize = document.querySelector(".main__size--alert");
+      alertSize.classList.remove("_alertActive");
+      basketBtn();
+   }
+   function get_size_for_basket(text_class) {
+      let size = null;
+      if ($('.' + text_class).length > 1) {
+         $('.' + text_class + ':checked').each(function () {
+            size = this.id;
+         });
+      } else {
+         $('.' + text_class).each(function () {
+            size = this.id;
+         });
+      }
+
+      return size;
+   }
+
+   //! ///---basket---\\\ !\\
+
+   $("._ajaxClick").click(ajaxGo);
    function ajaxGo(event) {
       if (this.classList.contains('body__checkboxBtn')) {
          $("._ajaxClick").prop('checked', false);
@@ -377,6 +388,28 @@ $(document).ready(function () {
          }
       });
    }
+   function get_filter_textColor(text_id) {
+      let filterData = [];
+      let color = null;
+      $('.' + text_id + ':checked').each(function () {
+         color = this.id.replaceAll("#", "");
+         filterData.push(color);
+      });
+      return filterData;
+   }
+   function get_filter_textPage(text_id) {
+      let filterData = [];
+      let page = null;
+      $('.' + text_id + ':checked').each(function () {
+         page = this.id.replaceAll("page", "");
+         filterData.push(page);
+      });
+      return filterData;
+   }
+
+   //! ///---AJAX in kategory.php---\\\ !\\
+
+   $("._ajaxColorClick").click(ajaxColorGo);
    function ajaxColorGo(event) {
       let id = get_filter_text('body__color');
       let newHistory = `?id=${id}`;
@@ -437,7 +470,7 @@ $(document).ready(function () {
             history.pushState(null, null, location.origin + location.pathname + newHistory);
             $("._ajaxColorClick").click(ajaxColorGo);
             $("._basketItemClick").click(basketArr);
-            $(".body__choise--size").click(removeAlert);
+            $(".body__choise--size").click(btnSizeClick);
             basketBtn();
             $.ajax({
                url: 'php/item.php/itemPopap.php',
@@ -471,104 +504,36 @@ $(document).ready(function () {
       });
       return filterData;
    }
-   function get_filter_textColor(text_id) {
-      let filterData = [];
-      let color = null;
-      $('.' + text_id + ':checked').each(function () {
-         color = this.id.replaceAll("#", "");
-         filterData.push(color);
-      });
-      return filterData;
-   }
-   function get_size_for_basket(text_class) {
-      let size = null;
-      if ($('.' + text_class).length > 1) {
-         $('.' + text_class + ':checked').each(function () {
-            size = this.id;
-         });
-      } else {
-         $('.' + text_class).each(function () {
-            size = this.id;
-         });
-      }
 
-      return size;
-   }
-   function get_filter_textPage(text_id) {
-      let filterData = [];
-      let page = null;
-      $('.' + text_id + ':checked').each(function () {
-         page = this.id.replaceAll("page", "");
-         filterData.push(page);
+   //! ///---AJAX in item.php---\\\ !\\
+
+   $("#clientNumberBtn").click(ajaxClientNumber);
+   function ajaxClientNumber(event){
+      event.preventDefault();
+      let number = document.querySelector(".clientNumber").value; 
+      //! --------------------------------------------------------------------------нужна проверка
+      $.ajax({
+         url: 'php/numberSendTelegram.php',
+         method: 'POST',
+         data: {number:number},
+         success: function (response) {
+         }
       });
-      return filterData;
-   }
-   function removeAlert () {
-      const alertSize = document.querySelector(".main__size--alert");
-      alertSize.classList.remove("_alertActive");
-      basketBtn();
    }
    
-   // function basketArr (){
-   //    let idArr=[] 
-   //    if(localStorage.getItem('cart')){
-   //       idArr = JSON.parse(localStorage.getItem('cart'));
-   //       if(idArr.includes(get_filter_id("main__btnName"))){
-   //          //элемент уже в корзине
-   //       }else{
-   //          idArr.push(get_filter_id("main__btnName"));
-   //          localStorage.setItem('cart',JSON.stringify(idArr));
-   //       }
-   //    }else{
-   //       idArr.push(get_filter_id("main__btnName"));
-   //       localStorage.setItem('cart',JSON.stringify(idArr));
-   //    }
-   //    ajaxBasketGo();
-   // }
-   // function ajaxBasketGo(event){
-   //    if(localStorage.getItem('cart')){
-   //       const id = JSON.parse(localStorage.getItem('cart'));
-   //       console.log(id);
-   //       $.ajax({
-   //          url:'php/basket/basketAction.php',
-   //          method:'POST',
-   //          data:{id:id},
-   //          success:function(response){
-   //             $("#resultBasket").html(response);
-   //          }
-   //       });
-   //       $.ajax({
-   //          url:'php/basket/basketCount.php',
-   //          method:'POST',
-   //          data:{id:id},
-   //          success:function(response){
-   //             $("#basketCount").html(`<div class="header__count--in">${response}</div>`);
-   //             $("#basketCountIn").html(response);
-   //          }
-   //       });
-   //       $.ajax({
-   //          url:'php/basket/basketSum.php',
-   //          method:'POST',
-   //          data:{id:id},
-   //          success:function(response){
-   //             $("#basketSum").html(response);
-   //          }
-   //       });
-   //    }
-   // }
-   // function get_filter_id(text_id){
-   // let id;
-   //    $('.'+text_id).each(function(){
-   //       id=this.id; 
-   //    });
-   //    return id;
-   // }
-   //! ///---Ajax---\\\ !\\
-   ajaxBasketGo();
-   basketBtn();
+   //! ///---AJAX number send telegram---\\\ !\\
+
+   ajaxBasketGo();//check localstorage and insert items into basket
+   basketBtn();//check if item in localstorage=>change btn
+
+   //! ///---functionCALL---\\\ !\\
+
 });
+
 //! ///---jQuery---\\\ !\\
 /*! ///---jQuery---\\\ !*/
+
+
 const searchBtn = document.querySelector('.searchBtn');
 const headerInner = document.querySelector('.header__inner');
 const body = document.querySelector('body');
@@ -766,11 +731,10 @@ const url = window.location.href
 if (indexTop.length > 0) {
    for (let top of indexTop) {
       top.addEventListener('click', function () {
-
-         if (url.indexOf('index') != -1) {
-            smoothScroll(0, 'top', 30);
-         } else {
+         if (url.indexOf('kategory') != -1 || url.indexOf('item') != -1 || url.indexOf('search') != -1) {
             window.location.href = 'index.php'
+         } else {
+            smoothScroll(0, 'top', 30);
          }
       })
    }
@@ -849,6 +813,69 @@ const navigationHover = () => {
    }
 }
 //! ///---NAVIGATION HOVER---\\\ !\\
+const basketOpen = () => {
+   const basketTogle = document.querySelectorAll('._basketTogle');
+   const basket = document.querySelector('.basket');
+   if (basketTogle.length > 0 && basket) {
+      for (let basketTogleItem of basketTogle) {
+         basketTogleItem.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (localStorage.getItem('cart')) {
+               cart = JSON.parse(localStorage.getItem('cart'));
+               if(cart.length>0){
+                  basket.classList.toggle('_basketTogle')
+               }
+            }
+         })
+      }
+   }
+}
+//! ///---BASKET OPEN---\\\ !\\
+function pagination(parrentClass){
+   const parrent = document.querySelector(parrentClass);
+   if (parrent) {
+      let checkedElement
+      const paginationParrentLength = parrent.children.length;
+      for (let i = 0; i < paginationParrentLength; i++) {
+         if (parrent.children[i].firstElementChild.checked) {
+            checkedElement = i;
+         }
+      }
+      for (let i = paginationParrentLength - 1; i >= 0; i--) {
+
+         if (checkedElement < paginationParrentLength - 4 && i < paginationParrentLength - 1 && i > checkedElement + 1 || checkedElement > 3 && i != 0 && i < checkedElement - 1) {
+            parrent.children[i].remove();
+         }
+      }
+      if (checkedElement < paginationParrentLength - 4) {
+         parrent.lastElementChild.before('...');
+      }
+      if (checkedElement > 3) {
+         parrent.firstElementChild.after('...');
+      }
+   }
+}
+//! ///---PAGINATION---\\\ !\\
+function imgClick(img, parent){
+   const popapClick = document.querySelectorAll(img);
+   const popap = document.querySelector(parent);
+   if (popapClick.length > 0) {
+      for (let popapClickItem of popapClick) {
+         popapClickItem.addEventListener('click', () => {
+            if (popap) {
+               if (!popap.classList.contains('_popapActive')) {
+                  popap.classList.add('_popapActive');
+                  body.style.overflow = 'hidden';
+               } else {
+                  popap.classList.remove('_popapActive');
+                  body.style.overflow = '';
+               }
+            }
+         })
+      }
+   }
+}
+//! ///---IMG FULLSCREEN---\\\ !\\
 swipeClick(); //smoothh scroll
 burgerOpen(); //burger open/close
 spoilerFlex(); //ADD spoilers
@@ -858,6 +885,7 @@ heaederHiden();
 navigationHover();
 pagination('.body__pagination');
 imgClick('._popapClick', '.popap');
+basketOpen();
 //! ///---FUNCTIONS CALL---\\\ !\\
 window.addEventListener('scroll', function () {
    swipeHiden();
@@ -872,18 +900,3 @@ window.addEventListener('resize', function () {
    }
 })
 //! ///---FUNCTION CALL ON RESIZE---\\\ !\\
-const basketOpen = () => {
-   const basketTogle = document.querySelectorAll('._basketTogle');
-   const basket = document.querySelector('.basket');
-   if (basketTogle.length > 0 && basket) {
-      for (let basketTogleItem of basketTogle) {
-         basketTogleItem.addEventListener('click', (event) => {
-            event.preventDefault();
-            if (localStorage.getItem('cart')) {
-               basket.classList.toggle('_basketTogle')
-            }
-         })
-      }
-   }
-}
-basketOpen();

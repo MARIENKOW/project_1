@@ -1717,7 +1717,14 @@ html {
       color: $color1;
       font-size: $fontsize30px;
    }
-
+   ._in{
+      outline: 3px solid $color1;
+      background-color: rgb(211, 113, 113);
+      cursor: auto;
+      &:hover{
+      background-color: rgb(211, 113, 113);
+      }
+   }
    &__svg {
       fill: $color1;
       width: 30px;
@@ -1727,6 +1734,21 @@ html {
 
    &__btnName {
       font-weight: 400;
+   }
+   &__loading{
+      text-align: center;
+      display: none;
+   }
+   ._loading{
+      .main__svg{
+         display: none;
+      }
+      .main__btnName{
+         display: none;
+      }
+      .main__loading{
+         display: block;
+      }
    }
    &__column{
 
@@ -1970,9 +1992,47 @@ html {
       }
    }
    &__item {
+      position: relative;
       display: block;
       padding: 10px 0px;
       color: #121212;
+      &--cross{
+         position: absolute;
+         top: 5px;
+         right: 5px;
+         aspect-ratio: 1/1;
+         width: 30px;
+         display: flex;
+         align-items: center;
+         padding: 5px;
+         background-color: $color1;
+         z-index: 3;
+         &:hover{
+            background-color: rgb(255, 255, 255);
+            
+         }
+         span{
+            display: block;
+            height: 2px;
+            width: 100%;
+            position: relative;
+            &::before,&::after{
+               content: '';
+               position: absolute;
+               top: 0;
+               left: 0;
+               width: 100%;
+               height: 100%;
+               background-color: #121212;
+            }
+            &::before{
+               transform: rotate(45deg);
+            }
+            &::after{
+               transform: rotate(-45deg);
+            }
+         }
+      }
    }
 
    &__item--main {

@@ -94,11 +94,12 @@ $singles = get_single_by_id($idColor);
             <?php }?>
          </div>
       </div>
-      <div class="main__btn btn _basketItemClick">
+      <div id="btnBasket" class="main__btn btn _basketItemClick">
          <svg id="btnSvg" class="main__svg">
             <use xlink:href="#basket"></use>
          </svg>
          <div id='<?php echo $singles['id']?>' class="main__btnName">до кошика</div>
+         <div class="main__loading">...</div>
       </div>
    </div>
 </div>
