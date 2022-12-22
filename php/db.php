@@ -1,5 +1,5 @@
 <?php 
-define('DB_HOST','localhost');
+define('DB_HOST','172.20.10.5');
 define('DB_USER','root');
 define('DB_PASSWORD','');
 define('DB_NAME','borsa');
@@ -106,7 +106,7 @@ function get_single_by_id($id) {
 }
 function get_photo_by_id($id) {
     global $connection;
-    $locations =$connection->query("SELECT location from photo where id_item =$id");
+    $locations =$connection->query("SELECT location from photo where id_item =$id ORDER BY main DESC");
     // foreach ($single as $singles);
     return $locations;
 }
@@ -151,4 +151,5 @@ function get_sum_by_basket($id) {
     foreach ($single as $singles);
     return $singles;
 }
+
 ?>

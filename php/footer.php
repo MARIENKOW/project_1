@@ -27,13 +27,18 @@
                <div class="footer__logo index__top">
                   <img src="img/footer/logo5.png" alt="footerLogo">
                </div>
-               <div class="footer__send">
+               <div class="footer__send _ajaxSendNumber">
                   <div class="footer__title">Ми вам передзвонимо</div>
                   <form>
-                     <div class="footer__prenumber">+38</div>
-                     <input class="footer__number clientNumber" placeholder=" - - - - - - - - -" type="tel" name="number">
-                     <input id="clientNumberBtn" class="footer__btn" type="submit" value="надіслати">
+                     <input class="footer__number clientNumber" value="+380" placeholder="+380YYXXXXXXX" maxlength="13" type="tel" name="number">
+                     <button class="footer__btn" id="clientNumberBtn" type="submit">
+                        <svg id="sendSvg" class="footer__btn--svg">
+                           <use xlink:href="#send"></use>
+                        </svg>
+                     </button>
                   </form>
+                  <div class="footer__warning">введіть номер формату: +380YYXXXXXXX</div>
+                  
                </div>
             </div>
          </div>
