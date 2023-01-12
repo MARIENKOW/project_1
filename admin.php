@@ -16,7 +16,6 @@
       </div>
    </div>
    <script src="jQuery/jquery-3.6.1.min.js"></script>
-   <script src="js/slick.min.js"></script>
-   <script src="js/app.js"></script>
+   <script src="js/admin.js"></script>
 </body>
 </html>

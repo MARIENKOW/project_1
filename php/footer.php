@@ -28,7 +28,7 @@
                   <img src="img/footer/logo5.png" alt="footerLogo">
                </div>
                <div class="footer__send _ajaxSendNumber">
-                  <div class="footer__title">Ми вам передзвонимо</div>
+                  <div class="footer__title">Ми вам зателефонуємо</div>
                   <form>
                      <input class="footer__number clientNumber" value="+380" placeholder="+380YYXXXXXXX" maxlength="13" type="tel" name="number">
                      <button class="footer__btn" id="clientNumberBtn" type="submit">

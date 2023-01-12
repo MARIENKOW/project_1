@@ -1,5 +1,5 @@
 <?php 
-define('DB_HOST','172.20.10.5');
+define('DB_HOST','127.0.0.1');
 define('DB_USER','root');
 define('DB_PASSWORD','');
 define('DB_NAME','borsa');
@@ -90,6 +90,12 @@ function get_single_by_kategory($value,$kategory,$brand,$size,$color,$sort,$page
         $sql .=" LIMIT $offset,$limit";
     };
     
+    $cats = $connection->query($sql);
+    return $cats;
+}
+function get_remove() {
+    global $connection;
+    $sql = "SELECT item.id,item.title,item.price,item.kategory,item.article FROM item inner join photo on item.id = photo.id_item where photo.main = 'yes'";
     $cats = $connection->query($sql);
     return $cats;
 }

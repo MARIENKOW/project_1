@@ -995,7 +995,7 @@ html {
    }
    &__menu {
       overflow: scroll;
-      height: calc(100vh - 69px);
+      height: calc(100vh - 120px);
       position: sticky;
       top: 69px;
       display: flex;
@@ -1416,16 +1416,20 @@ html {
    &__pagination{
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 5px;
+      border-top: 2px solid #000;
+      border-bottom: 2px solid #000;
+      padding: 3px 0px;
+      align-items: center;
    }
    &__number{
-      // background-color: $color1;
       color: #121212;
       font-size: 24px;
    }
    .pagination__label{
       display: inline-block;
       padding: 10px;
+      box-shadow: inset 0px 0px 5px #000;
    }
 }
 
@@ -1439,13 +1443,6 @@ html {
       font-family: $fontfamily3;
       color: #181818;
    }
-
-   &__history {
-   }
-
-   &__body {
-   }
-
    &__row {
       display: flex;
       padding: 10px 0px;
@@ -1710,12 +1707,6 @@ html {
          display: block;
       }
    }
-   &__column{
-
-   }
-   &__text{
-
-   }
    &__name{
       font-size: $fontsize30px;
       text-transform: uppercase;
@@ -1811,9 +1802,6 @@ html {
          transform: translateY(-50%) rotate(45deg);
       }
    }
-
-   &__photo {
-   }
    &__img{
       object-fit: contain;
       height: 100%;
@@ -1896,10 +1884,6 @@ html {
    &__inner {
       padding: 0px 20px 0px 20px;
    }
-
-   &__block {
-   }
-
    &__header {
       padding: 20px 0px;
       display: flex;
@@ -1910,13 +1894,6 @@ html {
    &__count {
       display: inline-flex;
    }
-
-   &__count--title {
-   }
-
-   &__count--number {
-   }
-
    &__cross {
       cursor: pointer;
       display: inline-block;
@@ -2049,10 +2026,6 @@ html {
       border-bottom: 1px solid rgba(0, 0, 0, 0.3);
       padding: 10px 0px;
    }
-
-   &__itemLeft {
-   }
-
    &__itemRight {
       &::after {
          content: "";
@@ -2079,9 +2052,6 @@ html {
       justify-content: space-between;
       margin: 0px 0px 20px 0px;
       align-items: center;
-   }
-
-   &__left {
    }
 
    &__right {
@@ -2211,21 +2181,18 @@ html {
       &:not(:last-child){
          margin-bottom: 20px;
       }
-      &--add{
-
-      }
-      &--remove{
-
-      }
    }
-   .add__inner{
+
+}
+.add {
+   &__inner{
       padding: 10px 0px;
       font-family: $fontfamily3;
       form{
          padding: 20px 20px;
       }
    }
-   .add__input{
+   &__input{
       width: 100%;
       margin: 0px 0px;
       &::placeholder{
@@ -2251,7 +2218,7 @@ html {
          padding: 5px 30px 5px 5px;
       }
    }
-   .add__checkbox{
+   &__checkbox{
       display: none;
       &:checked{
          + label{
@@ -2269,7 +2236,7 @@ html {
          }
       }
    }
-   .add__photoBtn{
+   &__photoBtn{
       display: inline-block;
       border-radius: 10px;
       width: 25%;
@@ -2284,7 +2251,7 @@ html {
       cursor: pointer;
       background-color: rgba(255, 255, 255, 0.6);
    }
-   .add__imgUpload{
+   &__imgUpload{
       aspect-ratio: 1/1.5;
       width: 100px;
       position: relative;
@@ -2303,40 +2270,41 @@ html {
          width: 25%;
       }
    }
-   .add__imgIn{
+   &__imgIn{
       object-fit: cover;
       width: 100%;
       height: 100%;
    }
-   .add__upload{
+   &__upload{
       width: 100%;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
    }
-   .add__row{
+   &__row{
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-bottom: 20px;
    }
-   .add__block{
+   &__block{
       width: calc(50% - 5px);
       position: relative;
    }
-   .add__section{
+   &__section{
       min-width: 100%;
       display: flex;
       justify-content: center;
       gap: 10px;
       align-items: start;
    }
-   .add__title{
+   &__title{
       font-size: $fontsize30px;
       text-transform: uppercase;
       font-weight: 600;
       position: relative;
+      text-align: center;
       &--color{
          height: 40px;
          font-size: $fontsize16px;
@@ -2356,7 +2324,7 @@ html {
          text-align: right;
       }
    }
-   .add__subtitle{
+   &__subtitle{
       font-size: $fontsize20px;
       text-align: center;
       color: rgb(77, 77, 77);
@@ -2366,7 +2334,7 @@ html {
       pointer-events: none;
       opacity: .3;
    }
-   .add__choise{
+   &__choise{
       width: 33.33333%;
       aspect-ratio:  1/1;
       padding: 3px;
@@ -2374,7 +2342,7 @@ html {
       background-color: #fff;
       overflow: hidden;
    }
-   .add__label{
+   &__label{
       font-size: $fontsize20px;
       padding: 3px 7px;
       border-radius: 4px;
@@ -2384,7 +2352,7 @@ html {
          aspect-ratio: 1/1;
       }
    }
-   .add__wrapper{
+   &__wrapper{
       overflow: hidden;
       transition: .3s;
       display: flex;
@@ -2401,7 +2369,7 @@ html {
          align-items: flex-end;
       }
    }
-   .add__inputIn{
+   &__inputIn{
       position: absolute;
       content: '';
       top: 0;
@@ -2493,7 +2461,7 @@ html {
          opacity: 0.3;
       }
    }
-   .add__btn{
+   &__btn{
       width: 100%;
       margin: 0px 0px 20px 0px;
       &--newColor{
@@ -2526,7 +2494,92 @@ html {
       }
    }
 
+   &__popap {
+      background-color: $color1;
+      font-size: 8px;
+      font-family:$fontfamily3;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%,-50%,0);
+      width: 300px;
+      height: 300px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      z-index: 20;
+      border: 3px solid #000;
+      border-radius: 25px;
+      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.8);
+   }
 }
+
+.popapBtn{
+   font-size: $fontsize16px;
+}
+.remove{
+   table { 
+      width: 100%;
+      border-collapse: collapse; 
+      margin: 30px 0px;
+   }
+   tr{
+      border-bottom: 2px solid #000 ;
+   }
+   td{
+      border-right: 2px solid #000;
+      padding: 3px 5px;
+   }
+   &__btn{
+      margin: 20px 0px 0px 0px;
+   }
+   &__popap{
+      display: block;
+      padding: 0;
+      &--in{
+         padding: 20px;
+         min-width: 100%;
+         min-height: 100%;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+      }
+   }
+   &__popapRemove{
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      aspect-ratio: 1/1;
+      z-index: 30;
+      span{
+         display: block;
+         position: relative;
+         min-height: 100%;
+         &::before,&::after{
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #121212;
+         }
+         &::before{
+            transform: translateY(-50%) rotate(45deg);
+         }
+         &::after{
+            transform: translateY(-50%) rotate(-45deg);
+
+         }
+      }
+   }
+}
+
+
 
 
 /*! ///------------------------admin.php-------------------------\\\ !*/
@@ -2912,9 +2965,6 @@ html {
             transform: rotate(-45deg);
          }
       }
-      &__menu {
-         top: 59px;
-      }
       &__wrapper {
          display: flex;
          padding: 20px 0px;
@@ -3000,7 +3050,6 @@ html {
       }
    }
 }
-
 @media (max-width: 566px) {
    .about {
       &__right {

@@ -324,8 +324,10 @@ $(document).ready(function () {
       let color = get_filter_textColor('body__color');
       let sort = get_filter_text('body__sortAjax');
       let page;
+      let pageScroll;
       if (this.classList.contains('body__numberCheck')) {
          page = get_filter_textPage('body__numberCheck');
+         pageScroll = true;
       } else {
          page = [1];
       }
@@ -358,6 +360,11 @@ $(document).ready(function () {
          method: 'POST',
          data: { action: action, kategory: kategory, gender: gender, brand: brand, size: size, color: color, sort: sort, page: page },
          success: function (response) {
+            if(pageScroll){
+               const bodyItems = document.querySelector(".body__items");
+               console.log(bodyItems);
+               smoothScroll(bodyItems,"top",30);
+            }
             $(".body__loading").hide();
             $("#result").html(response);
             $("#bodyLink").html("Товари за фільтром");
@@ -507,156 +514,7 @@ $(document).ready(function () {
    }
    //! ///---AJAX number send telegram---\\\ !\\
 
-   $("._ajaxAdminBtn").click(login);
-   function login(event){
-      event.preventDefault();
-      const login = $('input[name="login"]').val();
-      const password = $('input[name="password"]').val();
 
-      $.ajax({
-         url: 'php/admin/login.php',
-         method: 'POST',
-         data: {login:login,password:password},
-         success: function (response) {
-            if(Boolean(response)){
-               location.href = 'adminChoose.php';
-            }else{
-               $("._ajaxSendNumber").addClass('_warningActive')
-            }
-         }
-      });
-
-   }
-
-   $("._ajaxAdminAddBtn").click(adminAdd);
-   function adminAdd(event){
-      event.preventDefault();
-      let formData = new FormData();
-      const mainColorBlock = document.querySelector(".mainColorBlock");
-      if(mainColorBlock){
-         const mainPhoto = mainColorBlock.querySelector("._ajaxMainPhoto");
-         const photos = mainColorBlock.querySelectorAll("._ajaxPhotos");
-         const title = mainColorBlock.querySelector("input[name='title']").value;
-         const text = mainColorBlock.querySelector("textarea[name='text']").value;
-         const color = get_filter_choose(".oldColors","input[name='color']",mainColorBlock);
-         const price = mainColorBlock.querySelector("input[name='price']").value;
-         const brand = get_filter_choose(".oldBrands","input[name='brand']",mainColorBlock);
-         const article = mainColorBlock.querySelector("input[name='article']").value;
-         const kategory = get_filter_radio("_kategoryAdmin");
-         const gender = get_filter_text("_genderAdmin");
-         const sizes = get_filter_choose(".oneSizeClick","input[name='size']",mainColorBlock);
-         // console.log(mainPhoto,photos,title,text,color,price,brand,article,kategory,gender,sizes);
-         if(mainPhoto && photos && title && text && color && price && brand && article && kategory && gender && sizes){
-            for(let i = 0;i<photos.length;i++){
-               formData.append(`photos_${i}`,photos[i].file);
-            }
-            formData.append('mainPhoto',mainPhoto.file);
-            formData.append('title',title);
-            formData.append('text',text);
-            formData.append('color',color);
-            formData.append('price',price);
-            formData.append('brand',brand);
-            formData.append('article',article);
-            formData.append('sizes',sizes.split(","));
-            formData.append('kategory',kategory);
-            formData.append('gender',gender);
-
-            const newColorBlocks = document.querySelectorAll(".newColorBlock");
-            if(newColorBlocks.length>0){
-               for(let i = 0; i<newColorBlocks.length;i++){
-                  let newColorBlock = newColorBlocks[i];
-                  const mainPhoto = newColorBlock.querySelector("._ajaxMainPhoto");
-                  const photos = newColorBlock.querySelectorAll("._ajaxPhotos");
-                  const title = newColorBlock.querySelector("input[name='title']").value;
-                  const color = get_filter_choose(".oldColors","input[name='color']",newColorBlock);
-                  const price = newColorBlock.querySelector("input[name='price']").value;
-                  const article = newColorBlock.querySelector("input[name='article']").value;
-                  const sizes = get_filter_choose(".oneSizeClick","input[name='size']",newColorBlock);
-
-                  if(mainPhoto && photos && title && color && price && article && sizes){
-                     for(let j = 0;j<photos.length;j++){
-                        formData.append(`${i}photos_${j}`,photos[j].file);
-                     }
-                     formData.append(`length`,newColorBlocks.length);
-                     formData.append(`${i}mainPhoto`,mainPhoto.file);
-                     formData.append(`${i}title`,title);
-                     formData.append(`${i}color`,color);
-                     formData.append(`${i}price`,price);
-                     formData.append(`${i}article`,article);
-                     formData.append(`${i}sizes`,sizes.split(","));
-                  }else{
-                     alert("заповніть все");
-                     return;
-                  }
-               }
-
-            }
-            $.ajax({
-               url: 'insert.php',
-               method: 'POST',
-               data:formData,
-               processData : false,
-               contentType : false, 
-               success: function (response) {
-                  console.log(response);
-               }
-            });
-         }else{
-            alert("заповніть все")
-         }
-      }
-   }
-
-   $("._ajaxAdminNewColorBtn").click(adminAddNewColor);
-   function adminAddNewColor(event){
-      event.preventDefault();
-      const color = get_filter_choose(".oldColors","input[name='color']");
-      const newColorBlock = document.querySelectorAll(".newColorBlock").length;
-      if(color){
-         $.ajax({
-            url: 'php/admin/adminAddNewColor.php',
-            method: 'POST',
-            data:{color:color,newColorBlock:newColorBlock},
-            success: function (response) {
-               $("._ajaxAdminNewColorBtn").before(response);
-               oneSizeClick();
-               newColorActive();
-               oldColorActive();
-               newValueRemove();
-               oldValueRemove();
-               spoilerFlex();
-               removeInWrapper();
-            }
-         });
-      }else{
-         alert("заповніть всі поля")
-      }
-   }
-   //! ///---ADMIN---\\\ !\\
-
-
-   function get_filter_radio(text_id) {
-      let checked;
-      $('.' + text_id + ':checked').each(function () {
-         checked = this.id;
-      });
-      return checked;
-   }
-   function get_filter_choose(arr,value,block){
-      const Inblock = block || document;
-      const radios = Inblock.querySelectorAll(arr);
-      const input = Inblock.querySelector(value);
-      if(radios.length>0 && input){
-         for(let radio of radios){
-            if(radio.checked){
-               return radio.dataset.value;
-            }
-         }
-         if(input.closest(".add__section").classList.contains("_newColorActive")){
-            return input.value;
-         }
-      }
-   }
    function get_filter_textColor(text_id) {
       let filterData = [];
       let color = null;
@@ -834,7 +692,7 @@ function spoilerFlex() {
 }
 //! ///---SPOILER OPEN/CLOSE---\\\ !\\
 
-const smoothScroll = (element, position, steps) => {
+function smoothScroll(element, position, steps){
    let Y
    const step = steps || 10;
    if (element === 0) {
@@ -934,23 +792,41 @@ const heaederHiden = () => {
          filtr.addEventListener('click', () => {
             if (!bodyNav.classList.contains('_open')) {
                bodyNav.classList.add('_open')
-               body.style.overflow = 'hidden';
+               body.style.cssText = `overflow:hidden;pointer-events:none`;
                header.classList.add('_hid')
                header.style.transition = '.3s';
+               bodyNav.style.cssText='pointer-events:all;';
             } else {
                bodyNav.classList.remove('_open')
-               body.style.overflow = '';
+               body.style.cssText = '';
                header.classList.remove('_hid')
+               bodyNav.style.cssText='';
                setTimeout(() => {
                   header.style.transition = '';
                }, 500);
             }
-
          })
       }
    }
 }
-//! ///---header hiden---\\\ !\\
+const bodyNavClose = ()=>{
+   const bodyNav = document.querySelector('.body__nav')
+   if(bodyNav){
+      document.onclick = event=>{
+         if(bodyNav.classList.contains("_open") && !event.target.closest(".body__nav") && !event.target.classList.contains("_filtrByToggle")){
+            bodyNav.classList.remove('_open')
+            body.style.cssText = '';
+            header.classList.remove('_hid')
+            bodyNav.style.cssText='';
+            setTimeout(() => {
+               header.style.transition = '';
+            }, 500);
+         }
+      }
+   }
+}
+bodyNavClose();
+//! ///---filtrBy && header hiden---\\\ !\\
 const navigationHover = () => {
    const hovers = document.querySelectorAll('._hover');
    if (hovers.length > 0) {
@@ -1064,18 +940,6 @@ pagination('.body__pagination');
 imgClick('._popapClick', '.popap');
 basketOpen();
 
-//!-------------------------------
-
-removeInWrapper();
-
-//!-------------------------------
-
-newColorActive();
-oldColorActive();
-newValueRemove();
-oldValueRemove();
-oneSizeClick();
-
 //! ///---FUNCTIONS CALL---\\\ !\\
 window.addEventListener('scroll', function () {
    swipeHiden();
@@ -1090,174 +954,3 @@ window.addEventListener('resize', function () {
    }
 })
 //! ///---FUNCTION CALL ON RESIZE---\\\ !\\
-function addPreview(element){
-   let files =  Array.from(event.target.files);
-   if(files.length === 0)return;
-   
-   for(let file  of files){
-      if(!file.type.match('image')) return;
-      if(element.name.includes("mainPhoto")){
-         mainPhotoUpload(element,file);
-      }else if(element.name.includes("photos")){
-         otherPhotosUpload(element,file);
-      }
-   }
-
-}
-function mainPhotoUpload(element,file){
-   const mainPhotosWrapper = document.querySelector(element.dataset.wrapper);
-   const img = document.createElement("img");
-   const div = document.createElement("div");
-   const span = document.createElement("span");
-   div.classList.add("add__imgUpload");
-   img.classList.add("add__imgIn");
-   img.classList.add("_ajaxMainPhoto");
-   span.classList.add("_removeImgUpload")
-   img.file = file;
-   img.alt = file.name;
-   mainPhotosWrapper.append(div);
-   div.append(img);
-   div.append(span);
-   const reader = new FileReader();
-   reader.onload = event => {
-      img.src = event.target.result;
-      const labelPhoto = document.querySelector(`label[for='${element.id}']`)
-      labelPhoto.style.display = 'none';
-   };
-   reader.readAsDataURL(file);
-}
-function otherPhotosUpload(element,file){
-   const photosWrapper = document.querySelector(element.dataset.wrapper);
-   const img = document.createElement("img");
-   const div = document.createElement("div");
-   const span = document.createElement("span");
-   div.classList.add("add__imgUpload");
-   div.classList.add("add__imgUpload--other");
-   img.classList.add("add__imgIn");
-   img.classList.add("_ajaxPhotos");
-   span.classList.add("_removeImgUpload")
-   img.file = file;
-   img.alt = file.name;
-   photosWrapper.insertBefore(div, photosWrapper.querySelector(`label[for="${element.id}"]`));
-   div.append(img);
-   div.append(span);
-   const reader = new FileReader();
-   reader.onload = event => {
-      img.src = event.target.result;
-   };
-   reader.readAsDataURL(file);
-}
-function removeInWrapper(){
-   const addWrappers = document.querySelectorAll(".wrapperToRemove");
-   if(addWrappers.length>0){
-      for(let addWrapper of addWrappers){
-         if(!addWrapper.classList.contains("removeInWrapperActive")){
-            addWrapper.classList.add("removeInWrapperActive")
-            addWrapper.addEventListener("click",event=>{
-               if(event.target.classList.contains('_removeImgUpload')){
-                  event.target.parentElement.remove();
-                  if(addWrapper.classList.contains("mainWrapperRemove")){
-                     addWrapper.querySelector('label').style.display='';
-                  }
-               }
-            })
-         }
-      }
-   }
-}
-
-//! ///---------------------\\\ !\\
-function newColorActive(){
-   const newValues = document.querySelectorAll(".newValue");
-   if(newValues.length>0){
-      for( let newValue of newValues){
-         if(!newValue.classList.contains("_newValueActive")){
-            newValue.classList.add("_newValueActive")
-            newValue.addEventListener("input",()=>{
-               if(newValue.value.length>0){
-                  newValue.closest(".add__section").classList.add("_newColorActive")
-                  if(newValue.dataset.old)document.querySelector(newValue.dataset.old).classList.remove("_sliderRun");
-               }else{
-                  newValue.closest(".add__section").classList.remove("_newColorActive")
-                  if(newValue.dataset.old)document.querySelector(newValue.dataset.old).classList.add("_sliderRun")
-               }
-            })
-         }
-      }
-   }
-}
-function oldColorActive(){
-   const oldValues = document.querySelectorAll(".oldChoose");
-   if(oldValues.length>0){
-      for(let oldValue of oldValues){
-         if(!oldValue.classList.contains("_oldValueActive")){
-            oldValue.classList.add("_oldValueActive");
-            oldValue.addEventListener("click",(event)=>{
-               if(event.target.classList.contains("add__label")){
-                  oldValue.closest(".add__section").classList.add("_oldColorActive");
-               }
-            })
-         }
-      }
-   }
-}
-function newValueRemove(){
-   const removes = document.querySelectorAll(".newValueRemove");
-   if(removes.length>0){
-      for(let remove of removes){
-         if(!remove.classList.contains("_newValueRemoveActive")){
-            remove.classList.add("_newValueRemoveActive");
-            remove.addEventListener("click",()=>{
-               if(remove.closest('.add__section').classList.contains("_newColorActive")){
-                  if(remove.previousElementSibling.name ==="color"){
-                     remove.previousElementSibling.value = '#ffffff';
-                  }else{
-                     remove.previousElementSibling.value = '';
-                  }
-                  remove.closest('.add__section').classList.remove("_newColorActive")
-                  if(remove.previousElementSibling.dataset.old)document.querySelector(remove.previousElementSibling.dataset.old).classList.add("_sliderRun");
-               }
-            })
-         }
-      }
-   }
-}
-function oldValueRemove(){
-   const removes = document.querySelectorAll(".oldValueRemove");
-   if(removes.length>0){
-      for(let remove of removes){
-         if(!remove.classList.contains("_oldValueRemoveActive")){
-            remove.classList.add("_oldValueRemoveActive");
-            remove.addEventListener("click",()=>{
-               if(remove.closest('.add__section').classList.contains("_oldColorActive")){
-                  remove.closest('.add__section').classList.remove("_oldColorActive")
-                  for(let item of document.querySelectorAll(remove.dataset.remove)){
-                     if(item.checked){
-                        item.checked = false;
-                     }
-                  }
-               }
-            })
-         }
-      }
-   }
-}
-function oneSizeClick(){
-   const elements = document.querySelectorAll(".oneSizeClick");
-   if (elements.length>0){
-      for(let element of elements){
-         if(!element.classList.contains("_oneSizeClickActive")){
-            element.classList.add("_oneSizeClickActive")
-            element.addEventListener("click",()=>{
-               if(element.checked){
-                  element.closest(".add__section").classList.add("_oneSizeActive");
-               }
-               else{
-                  element.closest(".add__section").classList.remove("_oneSizeActive");
-               }
-            })
-         }
-      }
-   }
-}
-

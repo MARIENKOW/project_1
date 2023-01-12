@@ -137,7 +137,7 @@
                            <div class="body__wrapper">
                               <div class="body__choise">
                                  <input class="body__checkbox _ajaxClick body__gender--check"  <?php if($_GET['value']){foreach($_GET['value'] as $value){ if($value=='male'){echo'checked="yes"';}}}?> type="radio" name="gender" id="male">
-                                 <label class="body__label body__label--gender" for="male">чоловік
+                                 <label class="body__label body__label--gender" for="male">він
                                     <svg class="body__svg body__svg--male">
                                        <use xlink:href="#maleSvg"></use>
                                     </svg>
@@ -145,7 +145,7 @@
                               </div>
                               <div class="body__choise">
                                  <input class="body__checkbox _ajaxClick body__gender--check" <?php if($_GET['value']){foreach($_GET['value'] as $value){ if($value=='female'){echo'checked="yes"';}}}?> type="radio" name="gender" id="female">
-                                 <label class="body__label body__label--gender" for="female">жінка
+                                 <label class="body__label body__label--gender" for="female">вона
                                     <svg class="body__svg">
                                        <use xlink:href="#femaleSvg"></use>
                                     </svg>

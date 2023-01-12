@@ -62,7 +62,6 @@ if($_POST['length']){
       $price = $_POST[$j."price"];
       $color = $_POST[$j."color"];
       $article = $_POST[$j."article"];
-      echo $title,$price,$color,$article;
       $connection->query("INSERT INTO `item` (`id`, `title`, `text`, `price`, `male`, `female`, `kategory`, `brand`, `color`, `article`, `colorGroup`) VALUES (NULL, '', '', '', '', '', '', '', '', '', '')");
 
       $last_id_newColor = $connection->insert_id;
@@ -112,7 +111,7 @@ if($_POST['length']){
       }
    }
 }
-
+echo "true";
 
 
 

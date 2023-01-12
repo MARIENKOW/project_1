@@ -64,7 +64,7 @@ $newColorBlock = $_POST['newColorBlock'];
       <input class="login__input add__input add__input--price" placeholder="ціна" type="number" name="price">
    </div>
    <div class="add__row">
-      <input class="login__input add__input" placeholder="артикль" type="text" name="article">
+      <input class="login__input add__input" placeholder="артикул" type="text" name="article">
    </div>
    <div class="add__row">
       <section class="add__section">
