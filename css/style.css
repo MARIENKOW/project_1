@@ -1697,6 +1697,9 @@ html {
   font-family: "alumni sans";
   color: #181818;
 }
+.main__body {
+  position: relative;
+}
 .main__row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1995,8 +1998,17 @@ html {
   font-weight: 400;
 }
 .main__loading {
-  text-align: center;
   display: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+}
+.main .body__loading--in {
+  margin: 20% auto auto auto;
 }
 .main ._loading .main__svg {
   display: none;
@@ -2881,6 +2893,7 @@ html {
 }
 .add ._newColorActive .add__inputIn {
   pointer-events: all;
+  cursor: auto;
 }
 .add ._newColorActive .add__inputIn--text {
   display: none;
@@ -2906,6 +2919,7 @@ html {
 }
 .add ._oldColorActive .add__inputIn {
   pointer-events: all;
+  cursor: auto;
 }
 .add ._oldColorActive .add__inputIn--textO {
   display: none;
@@ -2918,6 +2932,7 @@ html {
 }
 .add ._oldColorActive .add__block--new {
   opacity: 0.3;
+  pointer-events: none;
 }
 .add__btn {
   width: 100%;

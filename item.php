@@ -37,6 +37,20 @@
                <div class="body__link" id="bodyLink"><?php echo $singles['title']; ?></div>
             </div>
             <div class="main__body">
+               <div id="loadngItem" class="main__loading">
+                  <div class="body__loading--in">
+                     <div class="intro__animation">
+                        <div class="intro__animation--twist">
+                           <img src="img/intro/pngwing.com (2).png" alt="1" class="intro__img">
+                           <img src="img/intro/pngwing.com (4).png" alt="1" class="intro__img intro__img--1">
+                           <img src="img/intro/pngwing.com (6).png" alt="1" class="intro__img intro__img--2">
+                           <img src="img/intro/pngwing.com (7).png" alt="1" class="intro__img intro__img--3">
+                           <img src="img/intro/pngwing.com (8).png" alt="1" class="intro__img intro__img--4">
+                           <img src="img/intro/pngwing.com (10).png" alt="1" class="intro__img intro__img--5">
+                        </div>
+                     </div>
+                  </div>
+               </div>
                <div id="result3" class="main__row">
                   <div class="main__mobile">
                      <div class="main__title"><?php echo $singles['title']; ?></div>

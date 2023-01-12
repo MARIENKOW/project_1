@@ -386,6 +386,7 @@ $(document).ready(function () {
 
    $("._ajaxColorClick").click(ajaxColorGo);
    function ajaxColorGo(event) {
+      $("#loadngItem").show();
       let id = get_filter_text('body__color');
       let newHistory = `?id=${id}`;
       $.ajax({
@@ -394,6 +395,7 @@ $(document).ready(function () {
          data: { id: id },
          success: function (response) {
             $("#result3").html(response);
+            $("#loadngItem").hide();
             $('.main__slider').slick({
                arrows: true,
                dots: false,

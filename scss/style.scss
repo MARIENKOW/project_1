@@ -1443,6 +1443,9 @@ html {
       font-family: $fontfamily3;
       color: #181818;
    }
+   &__body{
+      position: relative;
+   }
    &__row {
       display: flex;
       padding: 10px 0px;
@@ -1693,8 +1696,17 @@ html {
       font-weight: 400;
    }
    &__loading{
-      text-align: center;
       display: none;
+      background-color: rgba(255, 255, 255, 0.8);
+      position: absolute;
+      top:0;
+      left: 0;
+      width: 100%;
+      height: 100%;      
+      z-index: 20;
+   }
+   .body__loading--in{
+      margin: 20% auto auto auto;
    }
    ._loading{
       .main__svg{
@@ -2420,6 +2432,7 @@ html {
    ._newColorActive{
       .add__inputIn{
          pointer-events: all;
+         cursor: auto;
          &--text{
             display: none;
          }
@@ -2447,6 +2460,7 @@ html {
    ._oldColorActive{
       .add__inputIn{
          pointer-events: all;
+         cursor:auto;
          &--textO{
             display: none;
          }
@@ -2459,6 +2473,7 @@ html {
       }
       .add__block--new{
          opacity: 0.3;
+         pointer-events: none;
       }
    }
    &__btn{
