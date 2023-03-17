@@ -146,7 +146,7 @@ $(document).ready(function () {
       // проверка сколько размеров товара и выбран ли он
       if ($(".basketSize").length > 1) {
          if ($('.basketSize:checked').length > 0) {
-            if(!$("#btnBasket").hasClass("_in")){
+            if (!$("#btnBasket").hasClass("_in")) {
                $("#btnBasket").addClass("_loading");
             }
             ObjectByPhp(".main__btnName", localInner);
@@ -155,7 +155,7 @@ $(document).ready(function () {
             alertSize.classList.add("_alertActive");
          }
       } else {
-         if(!$("#btnBasket").hasClass("_in")){
+         if (!$("#btnBasket").hasClass("_in")) {
             $("#btnBasket").addClass("_loading");
          }
          ObjectByPhp(".main__btnName", localInner);
@@ -205,11 +205,11 @@ $(document).ready(function () {
       if (localStorage.getItem('cart') && $("#resultBasket")) {
          const cart = JSON.parse(localStorage.getItem('cart'));
          const basketResult = document.getElementById('resultBasket')
-            if(cart.length>0 && basketResult){
-               let sum = 0;
-               basketResult.innerHTML = "";
-               for (let i = 0; i<cart.length;i++) {
-                  const text = `
+         if (cart.length > 0 && basketResult) {
+            let sum = 0;
+            basketResult.innerHTML = "";
+            for (let i = 0; i < cart.length; i++) {
+               const text = `
                      <div class="basket__item">
                         <div class="basket__item--main">
                            <div class="basket__photo">
@@ -240,25 +240,25 @@ $(document).ready(function () {
                         </div>
                         <div id="${i}" class="basket__item--cross _basketRemoveItem"><span></span></div>
                      </div>`;
-                  basketResult.insertAdjacentHTML('beforeend', text);
-                  sum += Number(cart[i].price);
-               }
-               $("#basketCount").html(`<div class="header__count--in">${cart.length}</div>`);
-               $("#basketCountIn").html(cart.length);
-               $("#basketSum").html(sum);
-               $("._basketRemoveItem").click(basketRemove);
-            }else{
-               $(".basket").removeClass("_basketTogle");
-               $("#basketCount").html(``);
-               $('#resultBasket').html('')
-               $("#basketCountIn").html('');
-               $("#basketSum").html('');
+               basketResult.insertAdjacentHTML('beforeend', text);
+               sum += Number(cart[i].price);
             }
+            $("#basketCount").html(`<div class="header__count--in">${cart.length}</div>`);
+            $("#basketCountIn").html(cart.length);
+            $("#basketSum").html(sum);
+            $("._basketRemoveItem").click(basketRemove);
+         } else {
+            $(".basket").removeClass("_basketTogle");
+            $("#basketCount").html(``);
+            $('#resultBasket').html('')
+            $("#basketCountIn").html('');
+            $("#basketSum").html('');
+         }
       }
    }
    function basketBtn() {
       // проверка есть ли товар в корзине и изиенение кнопка(при загрузке страницы и нажатии на кнопку размера)
-      if (localStorage.getItem('cart') && $("._basketItemClick").length>0) {
+      if (localStorage.getItem('cart') && $("._basketItemClick").length > 0) {
          const itemId = document.querySelector('.main__btnName');
          function findId(Arr) {
             return Arr.id === itemId.id && Arr.size === get_size_for_basket("basketSize");
@@ -267,41 +267,41 @@ $(document).ready(function () {
             if ($('.basketSize:checked').length > 0) {
                let Arr = JSON.parse(localStorage.getItem('cart'));
                if (Arr.find(findId)) {
-                  btnChange(".main__btnName",1);
-               }else{
-                  btnChange(".main__btnName",2);
+                  btnChange(".main__btnName", 1);
+               } else {
+                  btnChange(".main__btnName", 2);
                }
             }
          } else {
             let Arr = JSON.parse(localStorage.getItem('cart'));
             if (Arr.find(findId)) {
-               btnChange(".main__btnName",1);
-            }else{
-               btnChange(".main__btnName",2);
+               btnChange(".main__btnName", 1);
+            } else {
+               btnChange(".main__btnName", 2);
             }
          }
       }
    }
-   function btnChange(btn,text){
+   function btnChange(btn, text) {
       const btnDom = document.querySelector(btn);
-      if(text === 1){
+      if (text === 1) {
          btnDom.innerHTML = "додано";
          $("#btnSvg").html('<use  xlink:href="#pass"></use>')
          $("#btnBasket").addClass("_in");
-      }else{
+      } else {
          btnDom.innerHTML = "до кошика";
          $("#btnSvg").html('<use  xlink:href="#basket"></use>')
          $("#btnBasket").removeClass("_in");
       }
    }
-   function basketRemove(){
+   function basketRemove() {
       let cart = JSON.parse(localStorage.getItem('cart'));
-      cart.splice(this.id,1);
-      localStorage.setItem('cart',JSON.stringify(cart));
+      cart.splice(this.id, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
       ajaxBasketGo();
       basketBtn();
    }
-   function btnSizeClick () {
+   function btnSizeClick() {
       const alertSize = document.querySelector(".main__size--alert");
       alertSize.classList.remove("_alertActive");
       basketBtn();
@@ -360,10 +360,10 @@ $(document).ready(function () {
          method: 'POST',
          data: { action: action, kategory: kategory, gender: gender, brand: brand, size: size, color: color, sort: sort, page: page },
          success: function (response) {
-            if(pageScroll){
+            if (pageScroll) {
                const bodyItems = document.querySelector(".body__items");
                console.log(bodyItems);
-               smoothScroll(bodyItems,"top",30);
+               smoothScroll(bodyItems, "top", 30);
             }
             $(".body__loading").hide();
             $("#result").html(response);
@@ -477,38 +477,38 @@ $(document).ready(function () {
    //! ///---AJAX in item.php---\\\ !\\
 
    $("#clientNumberBtn").click(ajaxClientNumber);
-   function ajaxClientNumber(event){
+   function ajaxClientNumber(event) {
       event.preventDefault();
       const ajaxSendNumber = document.querySelector("._ajaxSendNumber")
-      let numberInput = document.querySelector(".clientNumber"); 
-      let number = numberInput.value; 
+      let numberInput = document.querySelector(".clientNumber");
+      let number = numberInput.value;
       //! --------------------------------------------------------------------------нужна проверка
-      if(number.length == 13){
+      if (number.length == 13) {
          $.ajax({
             url: 'php/numberSendTelegram.php',
             method: 'POST',
-            data: {number:number},
+            data: { number: number },
             success: function (response) {
-               if((JSON.parse(response)).ok){
+               if ((JSON.parse(response)).ok) {
                   ajaxSendNumber.classList.add("_responseOk");
                   $("#sendSvg").html('<use xlink:href="#pass"></use>')
                }
             }
          });
-      }else{
+      } else {
          ajaxSendNumber.classList.add("_warningActive");
       }
    }
-   function keyChange(){
+   function keyChange() {
       const ajaxSendNumber = document.querySelector("._ajaxSendNumber")
       let numberInput = document.querySelector(".clientNumber");
-      if(ajaxSendNumber && numberInput){
-         numberInput.oninput = function(){
-            if(ajaxSendNumber.classList.contains("_responseOk")){
+      if (ajaxSendNumber && numberInput) {
+         numberInput.oninput = function () {
+            if (ajaxSendNumber.classList.contains("_responseOk")) {
                ajaxSendNumber.classList.remove("_responseOk")
                $("#sendSvg").html('<use xlink:href="#send"></use>')
             }
-            if(ajaxSendNumber.classList.contains("_warningActive")){
+            if (ajaxSendNumber.classList.contains("_warningActive")) {
                ajaxSendNumber.classList.remove("_warningActive")
             }
          }
@@ -644,7 +644,7 @@ let spoilerDotNoResize = null;
 
 function spoilerFlex() {
    let sliders = document.querySelectorAll('._slider');
-   if(sliders.length>0){
+   if (sliders.length > 0) {
       if (window.innerWidth <= 768) {
          for (let i = 0; i < sliders.length; i++) {
             let slider = sliders[i];
@@ -676,7 +676,7 @@ function spoilerFlex() {
    let slidersNoResize = document.querySelectorAll('._sliderNoResize');
    for (let i = 0; i < slidersNoResize.length; i++) {
       let slider = slidersNoResize[i];
-      if(!slider.classList.contains("_sliderThisActive")){
+      if (!slider.classList.contains("_sliderThisActive")) {
          slider.classList.add('_sliderRun')
          slider.nextElementSibling.classList.add('_a');
          slider.nextElementSibling.style.height = '0px';
@@ -694,7 +694,7 @@ function spoilerFlex() {
 }
 //! ///---SPOILER OPEN/CLOSE---\\\ !\\
 
-function smoothScroll(element, position, steps){
+function smoothScroll(element, position, steps) {
    let Y
    const step = steps || 10;
    if (element === 0) {
@@ -797,12 +797,12 @@ const heaederHiden = () => {
                body.style.cssText = `overflow:hidden;pointer-events:none`;
                header.classList.add('_hid')
                header.style.transition = '.3s';
-               bodyNav.style.cssText='pointer-events:all;';
+               bodyNav.style.cssText = 'pointer-events:all;';
             } else {
                bodyNav.classList.remove('_open')
                body.style.cssText = '';
                header.classList.remove('_hid')
-               bodyNav.style.cssText='';
+               bodyNav.style.cssText = '';
                setTimeout(() => {
                   header.style.transition = '';
                }, 500);
@@ -811,15 +811,15 @@ const heaederHiden = () => {
       }
    }
 }
-const bodyNavClose = ()=>{
+const bodyNavClose = () => {
    const bodyNav = document.querySelector('.body__nav')
-   if(bodyNav){
-      document.onclick = event=>{
-         if(bodyNav.classList.contains("_open") && !event.target.closest(".body__nav") && !event.target.classList.contains("_filtrByToggle")){
+   if (bodyNav) {
+      document.onclick = event => {
+         if (bodyNav.classList.contains("_open") && !event.target.closest(".body__nav") && !event.target.classList.contains("_filtrByToggle")) {
             bodyNav.classList.remove('_open')
             body.style.cssText = '';
             header.classList.remove('_hid')
-            bodyNav.style.cssText='';
+            bodyNav.style.cssText = '';
             setTimeout(() => {
                header.style.transition = '';
             }, 500);
@@ -877,7 +877,7 @@ const basketOpen = () => {
             event.preventDefault();
             if (localStorage.getItem('cart')) {
                cart = JSON.parse(localStorage.getItem('cart'));
-               if(cart.length>0){
+               if (cart.length > 0) {
                   basket.classList.toggle('_basketTogle')
                }
             }
@@ -886,7 +886,7 @@ const basketOpen = () => {
    }
 }
 //! ///---BASKET OPEN---\\\ !\\
-function pagination(parrentClass){
+function pagination(parrentClass) {
    const parrent = document.querySelector(parrentClass);
    if (parrent) {
       let checkedElement
@@ -911,7 +911,7 @@ function pagination(parrentClass){
    }
 }
 //! ///---PAGINATION---\\\ !\\
-function imgClick(img, parent){
+function imgClick(img, parent) {
    const popapClick = document.querySelectorAll(img);
    const popap = document.querySelector(parent);
    if (popapClick.length > 0) {
@@ -956,3 +956,37 @@ window.addEventListener('resize', function () {
    }
 })
 //! ///---FUNCTION CALL ON RESIZE---\\\ !\\
+
+const popapPhone = document.querySelector('.popapPhone');
+const popapPhoneBtn = document.querySelector('.popapPhone__btn');
+const popapPhoneIn = document.querySelector('.popapPhone__inner');
+const basket = document.querySelector('.basket');
+popapCross = document.querySelector('.popapPhone__cross');
+document.addEventListener('click',event=>{
+   console.log('dddddd');
+   if(popapPhone.style.display === 'none') return
+   if(!event.target.closest('.popapPhone__inner') || event.target.classList.contains('basket__cross')) popapPhone.style.display = 'none'
+})
+popapPhoneBtn.addEventListener('click',()=>{
+   popapPhone.style.display = 'none'
+   basket.classList.remove('_basketTogle')
+   let y = window.scrollY;
+   const end = document.body.scrollHeight - window.innerHeight;
+   function scrollBottom(){
+      y+=30;
+      window.scrollTo(0,y);
+      if(y<end){
+         setTimeout(scrollBottom)
+      }
+   }
+   scrollBottom()
+})
+
+const basketBtn = document.querySelector('.basket__btn')
+
+basketBtn.onclick = (e)=>{
+   e.preventDefault()
+   setTimeout(()=>{
+      popapPhone.style.display = 'block'
+   },100)
+}

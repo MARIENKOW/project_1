@@ -38,7 +38,7 @@ $newColorBlock = $_POST['newColorBlock'];
             <?php 
                foreach($colors as $color){
                ?>
-               <div class="add__choise <?php if($color['color'] === $colorFirst){ echo "_disabledColor";} ?>">
+               <div class="add__choise <?php for($i=0;$i<count($colorFirst);$i++){if($color['color'] === $colorFirst[$i]){ echo "_disabledColor";}} ?>">
                   <input class="add__checkbox oldColorsRemove<?php echo$newColorBlock; ?> oldColors" data-value="<?php echo $color['color']?>" type="radio" name="colorCheck<?php echo"[$newColorBlock]"; ?>"
                   id="<?php echo''.$color['color'].'['.$newColorBlock.']'; ?>">
                   <label class="add__label add__label--color" style = "background-color:<?php echo $color['color']?>" for="<?php echo''.$color['color'].'['.$newColorBlock.']'; ?>"></label>

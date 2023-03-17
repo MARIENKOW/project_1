@@ -106,12 +106,7 @@ html {
    z-index: 999;
    font-family: $fontfamily3, serif;
    background-color: $color1;
-   // transition: .3s;
    &__inner {
-      // height: 50px;
-      // display: flex;
-      // justify-content: space-between;
-      // align-items: center;
       display: grid;
       grid-template-columns: 220px 1fr 220px;
       align-items: center;
@@ -1919,6 +1914,7 @@ html {
          background-color: #121212;
          position: absolute;
          top: 50%;
+         left: 0;
       }
       &::before{
          transform: translateY(-50%) rotate(45deg);
@@ -2090,6 +2086,62 @@ html {
 ._basketTogle{
    transform: translateX(0);
 }
+
+.popapPhone {
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 200000;
+   width: 100%;
+   background-color: #00000074;
+   font-family: $fontfamily3;
+   .container{
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
+   &__inner {
+      max-width: 500px;
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+   }
+   &__cross{
+      position: absolute;
+      top: 20px;
+      right: 20px;
+   }
+   &__title {
+      text-transform: uppercase;
+      font-size: $fontsize30px;
+      padding: 50px 0px 10px 0px;
+   }
+
+   &__subtitle {
+      font-size: $fontsize18px;
+   }
+
+   &__click {
+      display: flex;
+      padding: 30px 0px 40px 0px;
+      justify-content: center;
+      gap: 20px;
+   }
+
+   &__btn {
+      background-color: rgb(255, 33, 33);;
+      color: $color1;
+      padding:10px 20px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      font-size: $fontsize18px;
+   }
+}
+
+
 
 /*! ///------------------------basket.php------------------------\\\ !*/
 //! ///------------------------admin.php-------------------------\\\ !\\

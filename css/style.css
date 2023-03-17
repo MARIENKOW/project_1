@@ -1159,7 +1159,6 @@ html {
 .body__menu {
   overflow: scroll;
   height: calc(100vh - 120px);
-  position: -webkit-sticky;
   position: sticky;
   top: 69px;
   display: -webkit-box;
@@ -2260,6 +2259,7 @@ html {
   background-color: #121212;
   position: absolute;
   top: 50%;
+  left: 0;
 }
 .basket__cross::before {
   -webkit-transform: translateY(-50%) rotate(45deg);
@@ -2456,6 +2456,67 @@ html {
   -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
           transform: translateX(0);
+}
+
+.popapPhone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200000;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4549019608);
+  font-family: "alumni sans";
+}
+.popapPhone .container {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.popapPhone__inner {
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+.popapPhone__cross {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.popapPhone__title {
+  text-transform: uppercase;
+  font-size: 30px;
+  padding: 50px 0px 10px 0px;
+}
+.popapPhone__subtitle {
+  font-size: 18px;
+}
+.popapPhone__click {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 30px 0px 40px 0px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 20px;
+}
+.popapPhone__btn {
+  background-color: rgb(255, 33, 33);
+  color: rgb(255, 228, 196);
+  padding: 10px 20px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  font-size: 18px;
 }
 
 /*! ///------------------------basket.php------------------------\\\ !*/

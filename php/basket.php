@@ -19,13 +19,28 @@
       </div>
       <div class="basket__block">
          <div class="basket__total basket__slim">
-            <!-- <p class="basket__title">додатково розраховується сума доставки</p> -->
             <div class="basket__totalPrice">
                <div class="basket__left">Всього</div>
                <div id="basketSum" class="basket__itemRight basket__right"></div>
             </div>
             <a href="tel:+380957748111" class="basket__btn btn">Замовити</a>
          </div>
+      </div>
+   </div>
+</div>
+<div style = 'display:none' class="popapPhone">
+   <div class="container">
+      <div class="popapPhone__inner">
+         <div class="popapPhone__cross">
+            <div class="basket__cross">
+            </div>
+         </div>
+         <h1 class="popapPhone__title">Замовлення приймаються в режимі телефонної розмови</h1>
+         <h3 class="popapPhone__subtitle">зателефонуйте нам або надішліть номер і ми вам передзвонимо</h3>
+         <section class="popapPhone__click">
+            <button class="popapPhone__btn">надіслати номер</button>
+            <a href='tel:+380957748111' class="popapPhone__btn">+380957748111</a>
+         </section>
       </div>
    </div>
 </div>

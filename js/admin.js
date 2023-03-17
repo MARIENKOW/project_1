@@ -117,7 +117,7 @@ $(document).ready(function () {
       event.preventDefault();
       if(!$("._ajaxAdminNewColorBtn").hasClass("ajaxAdminNewColorBtnActive")){
          $("._ajaxAdminNewColorBtn").addClass("ajaxAdminNewColorBtnActive");
-         const color = get_filter_choose(".oldColors", "input[name='color']");
+         const color = get_filter_chooseColor(".oldColors", "input[name='color']");
          const newColorBlock = document.querySelectorAll(".newColorBlock").length;
          if (color) {
             $.ajax({
@@ -200,23 +200,24 @@ $(document).ready(function () {
          }
       }
    }
-   function get_filter_textColor(text_id) {
-      let filterData = [];
-      let color = null;
-      $('.' + text_id + ':checked').each(function () {
-         color = this.id.replaceAll("#", "");
-         filterData.push(color);
-      });
-      return filterData;
-   }
-   function get_filter_textPage(text_id) {
-      let filterData = [];
-      let page = null;
-      $('.' + text_id + ':checked').each(function () {
-         page = this.id.replaceAll("page", "");
-         filterData.push(page);
-      });
-      return filterData;
+   function get_filter_chooseColor(arr, value, block) {
+      const array = []
+      const Inblock = block || document;
+      const radios = Inblock.querySelectorAll(arr);
+      const input = Inblock.querySelectorAll(value);
+      if (radios.length > 0 && input) {
+         for (let radio of radios) {
+            if (radio.checked) {
+               array.push(radio.dataset.value);
+            }
+         }
+         for(let inp of input){
+            if (inp.closest("._newColorActive")) {
+               array.push(inp.value);
+            }
+         }
+      }
+      return array;
    }
    function get_filter_text(text_id) {
       let filterData = [];
@@ -225,22 +226,6 @@ $(document).ready(function () {
       });
       return filterData;
    }
-   function get_size_for_basket(text_class) {
-      let size = null;
-      if ($('.' + text_class).length > 1) {
-         $('.' + text_class + ':checked').each(function () {
-            size = this.id;
-         });
-      } else {
-         $('.' + text_class).each(function () {
-            size = this.id;
-         });
-      }
-
-      return size;
-   }
-
-
 });
 
 
