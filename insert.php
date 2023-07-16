@@ -48,7 +48,7 @@ if(isset($_FILES)){
       $sqlPhoto .="INSERT INTO `photo` (`id`, `location`, `main`, `id_item`) VALUES (NULL, 'img/sql/$last_id/$fileName', 'yes', '$last_id')";
    }
    if(isset($_FILES['photos_0'])){
-      for($i=0;$_FILES["photos_$i"];$i++){
+      for($i=0;isset($_FILES["photos_$i"]);$i++){
          $fileName=$_FILES["photos_$i"]['name'];
          $sqlPhoto .=", (NULL, 'img/sql/$last_id/$fileName', '', '$last_id')";
          move_uploaded_file($_FILES["photos_$i"]['tmp_name'],$home.'img/sql/'.$last_id."/".$fileName);
@@ -56,7 +56,7 @@ if(isset($_FILES)){
    }
    $connection->query($sqlPhoto);
 }
-if($_POST['length']){
+if(isset($_POST['length'])){
    for($j=0;$j<$_POST['length'];$j++){
       $title = $_POST[$j."title"];
       $price = $_POST[$j."price"];
@@ -65,6 +65,7 @@ if($_POST['length']){
       $connection->query("INSERT INTO `item` (`id`, `title`, `text`, `price`, `male`, `female`, `kategory`, `brand`, `color`, `article`, `colorGroup`) VALUES (NULL, '', '', '', '', '', '', '', '', '', '')");
 
       $last_id_newColor = $connection->insert_id;
+      $test = "INSERT INTO `item` (`id`, `title`, `text`, `price`, `male`, `female`, `kategory`, `brand`, `color`, `article`, `colorGroup`) VALUES (NULL, '', '', '', '', '', '', '', '', '', '')";
 
       if($gender){
 
@@ -77,7 +78,7 @@ if($_POST['length']){
          }else{
             $sqlgender = "`male` = 'yes',`female` = 'yes'";
          }
-
+         $test .="UPDATE `item` SET `title` = '$title',`text` = '$text',`price` = '$price',$sqlgender,`kategory` = '$kategory',`brand` = '$brand',`color` = '$color',`article`='$article',`colorGroup`='$last_id' WHERE `item`.`id` = $last_id_newColor";
          $connection->query("UPDATE `item` SET `title` = '$title',`text` = '$text',`price` = '$price',$sqlgender,`kategory` = '$kategory',`brand` = '$brand',`color` = '$color',`article`='$article',`colorGroup`='$last_id' WHERE `item`.`id` = $last_id_newColor");
       }
 
@@ -88,6 +89,7 @@ if($_POST['length']){
             for($i=1;$i<count($sizes);$i++){
                $sqlSize .=",(NULL, '$sizes[$i]', '$last_id_newColor')";
             }
+            $test.="INSERT INTO `size` (`id`, `name`, `id_item`) $sqlSize";
             $connection->query("INSERT INTO `size` (`id`, `name`, `id_item`) $sqlSize");
          }
       }
@@ -107,11 +109,13 @@ if($_POST['length']){
                move_uploaded_file($_FILES[$j."photos_$i"]['tmp_name'],$home.'img/sql/'.$last_id_newColor."/".$fileName);
             }
          }
+         $test.=$sqlPhoto;
          $connection->query($sqlPhoto);
       }
    }
 }
-echo "true";
+echo 'true';
+
 
 
 

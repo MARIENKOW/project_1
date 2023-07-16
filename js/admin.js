@@ -24,7 +24,7 @@ $(document).ready(function () {
    $("._ajaxAdminAddBtn").click(adminAdd);
    function adminAdd(event) {
       event.preventDefault();
-      if(!$("._ajaxAdminAddBtn").hasClass("ajaxAdminAddBtnActive")){
+      if (!$("._ajaxAdminAddBtn").hasClass("ajaxAdminAddBtnActive")) {
          $("._ajaxAdminAddBtn").addClass("ajaxAdminAddBtnActive");
          let formData = new FormData();
          const mainColorBlock = document.querySelector(".mainColorBlock");
@@ -54,7 +54,7 @@ $(document).ready(function () {
                formData.append('sizes', sizes.split(","));
                formData.append('kategory', kategory);
                formData.append('gender', gender);
-   
+
                const newColorBlocks = document.querySelectorAll(".newColorBlock");
                if (newColorBlocks.length > 0) {
                   for (let i = 0; i < newColorBlocks.length; i++) {
@@ -66,7 +66,7 @@ $(document).ready(function () {
                      const price = newColorBlock.querySelector("input[name='price']").value;
                      const article = newColorBlock.querySelector("input[name='article']").value;
                      const sizes = get_filter_choose(".oneSizeClick", "input[name='size']", newColorBlock);
-   
+
                      if (mainPhoto && photos.length > 2 && title && color && price && article && sizes) {
                         for (let j = 0; j < photos.length; j++) {
                            formData.append(`${i}photos_${j}`, photos[j].file);
@@ -79,12 +79,13 @@ $(document).ready(function () {
                         formData.append(`${i}article`, article);
                         formData.append(`${i}sizes`, sizes.split(","));
                      } else {
+                        console.log(mainPhoto,photos.length > 2,title,color,price,article,sizes);
                         alert("заповніть все");
                         $("._ajaxAdminAddBtn").removeClass("ajaxAdminAddBtnActive");
                         return;
                      }
                   }
-   
+
                }
                $("._ajaxAdminAddBtn").html(". . .");
                $.ajax({
@@ -105,6 +106,7 @@ $(document).ready(function () {
                   }
                });
             } else {
+               console.log(mainPhoto,photos.length > 2,title,text,color,price,brand,article,kategory,gender,sizes);
                alert("заповніть все")
                $("._ajaxAdminAddBtn").removeClass("ajaxAdminAddBtnActive");
             }
@@ -115,7 +117,7 @@ $(document).ready(function () {
    $("._ajaxAdminNewColorBtn").click(adminAddNewColor);
    function adminAddNewColor(event) {
       event.preventDefault();
-      if(!$("._ajaxAdminNewColorBtn").hasClass("ajaxAdminNewColorBtnActive")){
+      if (!$("._ajaxAdminNewColorBtn").hasClass("ajaxAdminNewColorBtnActive")) {
          $("._ajaxAdminNewColorBtn").addClass("ajaxAdminNewColorBtnActive");
          const color = get_filter_chooseColor(".oldColors", "input[name='color']");
          const newColorBlock = document.querySelectorAll(".newColorBlock").length;
@@ -146,9 +148,9 @@ $(document).ready(function () {
    $("._ajaxAdminRemoveBtn").click(adminRemove);
    function adminRemove(event) {
       event.preventDefault();
-      if($("._ajaxAdminRemoveBtn").closest(".toChoosePage").length){
+      if ($("._ajaxAdminRemoveBtn").closest(".toChoosePage").length) {
          window.location.pathname = "/adminChoose.php"
-      }else{
+      } else {
          $("._ajaxAdminRemoveBtn").html(". . .")
          const choose = Array.from(document.querySelectorAll(".remove__checkbox")).filter(element => {
             return element.checked === true;
@@ -163,7 +165,7 @@ $(document).ready(function () {
             success: function (response) {
                if (response === "true") {
                   const popapTitle = document.querySelector(".popapTitle");
-                  popapTitle.innerHTML=`товар видалено!`;
+                  popapTitle.innerHTML = `товар видалено!`;
                   $(".add__popap").addClass("toChoosePage");
                   $("._ajaxAdminRemoveBtn").html("до сторінки вибору");
                } else {
@@ -198,6 +200,8 @@ $(document).ready(function () {
          if (input.closest(".add__section").classList.contains("_newColorActive")) {
             return input.value;
          }
+      }else{
+         return input.value;
       }
    }
    function get_filter_chooseColor(arr, value, block) {
@@ -211,7 +215,7 @@ $(document).ready(function () {
                array.push(radio.dataset.value);
             }
          }
-         for(let inp of input){
+         for (let inp of input) {
             if (inp.closest("._newColorActive")) {
                array.push(inp.value);
             }
@@ -387,14 +391,14 @@ document.addEventListener("click", event => {
    const popap = document.querySelector(".add__popap");
    if (popap && popap.style.display === "") {
       if (!event.target.closest(".add__popap") && !event.target.classList.contains("warningBtn")) {
-         if(popap.classList.contains("toChoosePage")){
+         if (popap.classList.contains("toChoosePage")) {
             window.location.pathname = "adminRemove.php"
-         }else{
+         } else {
             popap.style.display = "none";
             const body = document.querySelector("body");
             const form = document.querySelector("form");
-            body.style.overflow='';
-            form.style.pointerEvents='';
+            body.style.overflow = '';
+            form.style.pointerEvents = '';
          }
       }
    }
@@ -408,7 +412,7 @@ function newColorActive() {
             newValue.addEventListener("input", () => {
                if (newValue.value.length > 0) {
                   newValue.closest(".add__section").classList.add("_newColorActive")
-                  if (newValue.dataset.old) document.querySelector(newValue.dataset.old).classList.remove("_sliderRun");
+                  if (newValue.dataset.old) document.querySelector(newValue.dataset.old)?.classList?.remove("_sliderRun");
                } else {
                   newValue.closest(".add__section").classList.remove("_newColorActive")
                   if (newValue.dataset.old) document.querySelector(newValue.dataset.old).classList.add("_sliderRun")
@@ -517,26 +521,26 @@ function warningShowRemove() {
    if (choose.length > 0) {
       const popap = document.querySelector(".add__popap");
       const popapTitle = popap.querySelector(".popapTitle");
-      popapTitle.innerHTML=`видалити (${choose.length}) товари`;
+      popapTitle.innerHTML = `видалити (${choose.length}) товари`;
       popap.style.display = "";
       const body = document.querySelector("body");
       const form = document.querySelector("form");
-      body.style.overflow='hidden';
-      form.style.pointerEvents='none';
+      body.style.overflow = 'hidden';
+      form.style.pointerEvents = 'none';
    } else {
       return alert("виберіть товар")
    }
 }
-function popapRemoveAdmin(){
+function popapRemoveAdmin() {
    const popap = document.querySelector(".add__popap");
-   if(popap.classList.contains("toChoosePage")){
-      window.location.pathname="adminRemove.php"
-   }else{
+   if (popap.classList.contains("toChoosePage")) {
+      window.location.pathname = "adminRemove.php"
+   } else {
       popap.style.display = "none";
       const body = document.querySelector("body");
       const form = document.querySelector("form");
-      body.style.overflow='';
-      form.style.pointerEvents='';
+      body.style.overflow = '';
+      form.style.pointerEvents = '';
    }
 }
 spoilerFlex();
